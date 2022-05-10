@@ -1,0 +1,18 @@
+# Build results
+mnodetester/mnodetester
+
+# Test directory
+test
+
+# Virtualenv
+venv
+# Python module
+rpc_tester.egg-info
+
+# Config
+config.json
+
+.idea/
+reports/
+testReport/
+
