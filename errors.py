@@ -69,7 +69,7 @@ errors_json = """
     "arg0NonstringToCallArgsDataBytes": [-32602 ,"invalid argument 0: json: cannot unmarshal non-string into Go struct field CallArgs.data of type hexutil.Bytes"],
     "invalidNodeId": [-32000 ,"invalid kni: invalid node ID (wrong length, want 128 hex chars)"],
     "HTTPRPCNotRunning": [-32000 ,"HTTP RPC not running"],
-    "NameResolutionFailure": [-32000 ,"listen tcp4: lookup abcd: no such host"],
+    "NameResolutionFailure": [-32000 ,"no such host"],
     "HTTPAlreadyRunning": [-32000 ,"HTTP RPC already running on 0.0.0.0:8551"],
     "WSAlreadyRunning": [-32000 ,"WebSocket RPC already running on 0.0.0.0:8552"],
     "WSRPCNotRunning": [-32000 ,"WebSocket RPC not running"],
