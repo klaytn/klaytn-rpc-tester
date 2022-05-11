@@ -5,9 +5,9 @@
     "chainId": "2019",
     "faucetPrivateKey": "752a08fd165dcc7f37f3e444cf485c5b2020e4096a2cfd02f823a8b8280baaab",
     "faucetAddress": "0xf77e71cf745e14129a344bcfb7e28240a5351beb",
-    "faucetPassword": "2524",
-    "feePayerPrivateKey": "",
-    "feePayerAddress": "",
-    "feePayerPassword": "",
+    "faucetPassword": "2523",
+    "feePayerPrivateKey": "752a08fd165dcc7f37f3e444cf485c5b2020e4096a2cfd02f823a8b8280baaab",
+    "feePayerAddress": "0xf77e71cf745e14129a344bcfb7e28240a5351beb",
+    "feePayerPassword": "2523",
     "namespaces": "admin,debug,eth,governance,klay,net,personal,txpool"
 }
