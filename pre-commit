@@ -1,0 +1,7 @@
+#!/bin/sh
+source venv/bin/activate
+bash generate_ws_from_rpc.sh
+pyfiles=$(find . -name "*.py" -not -path "*/venv/*")
+for py in $pyfiles; do
+    black --line-length 120 $py
+done
