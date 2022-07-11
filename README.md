@@ -15,11 +15,9 @@ Please check below instructions after installing virtualenv :)
 All done :)
 
 ## Required
-
-- [1] EN: **Only EN** can be used for the test. CN and PN can't be used for the test.
-- [2] Faucet Account: An account which has enough amount KLAY for the test.
+- [1] Faucet Account: An account which has enough amount KLAY for the test.
 ### For EN (to be tested)
-- Options
+- Options 
   1. --rpc --rpcapi admin,debug,klay,eth,miner,net,personal,rpc,txpool,web3 --rpcport 8551 --rpcaddr 0.0.0.0
   2. --ws --wsapi admin,debug,klay,eth,miner,net,personal,rpc,txpool,web3 --wsport 8552 --wsaddr 0.0.0.0
   3. --sendertxhashindexing
@@ -33,6 +31,7 @@ All done :)
 - File 
   1. `block.rlp` should be placed at the EN excution path. The content of `block.rlp` is needed to be updated with the return value of `
   debug_getblockrlp` API.
+  2. `script/set_CNOnly.sh` - Script to set a private network with 1 CN easily.   
 
 ## Usage
 ### 0. Set config.json and run generate_ws_from_rpc.sh
@@ -54,6 +53,7 @@ All done :)
 ```
 
 `generate-ws_from_rpc.sh` - The script to change protocol `rpc` to `websocket` used by test script. You need to run this script if you have any updates on `{namespace}/*_rpc.py`
+ 
 
 ### 1. Run all tests
 ```shell
@@ -164,3 +164,4 @@ If you want to run tests for specific protocol, you can do like below.
 ## Caution
 
 It doesn't test full functionality of APIs, but basic operations.
+To maintain this project, please place pre-commit on .git/hooks/pre-commit
