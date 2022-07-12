@@ -107,6 +107,7 @@ errors_json = """
     "VMErrorOccurs": [-32000 ,"VM error occurs while running smart contract"],
     "InvalidKlaytnSignature": [-32000 ,"invalid Klaytn signature (V is not 27 or 28)"],
     "UnknownBlock": [-32000 ,"Unknown block"],
+    "unknownblock": [-32000 ,"unknown block"],
     "TransactionNotFound": [-32000 ,"transaction ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff not found"],
     "BlockNumberNotAssigned": [-32000 ,"block number is not assigned"],
     "ExistingFile": [-32000 ,"location would overwrite an existing file"],
