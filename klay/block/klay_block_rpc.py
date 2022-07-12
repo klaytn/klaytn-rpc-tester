@@ -556,7 +556,7 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         tag = "latest"
         params = ["0xffffffff"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "GivenBlockNotExisted", error)
+        Utils.check_error(self, "unknownblock", error)
 
     def test_klay_getCommittee_success(self):
 
@@ -587,7 +587,7 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         tag = "latest"
         params = ["0xffffffff"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "GivenBlockNotExisted", error)
+        Utils.check_error(self, "unknownblock", error)
 
     def test_klay_getCommitteeSize_success(self):
 
@@ -618,7 +618,7 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         tag = "latest"
         params = ["0xffffffff"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "GivenBlockNotExisted", error)
+        Utils.check_error(self, "unknownblock", error)
 
     def test_klay_getCouncil_success(self):
 
@@ -649,7 +649,7 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         tag = "latest"
         params = ["0xffffffff"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "GivenBlockNotExisted", error)
+        Utils.check_error(self, "unknownblock", error)
 
     def test_klay_getCouncilSize_success(self):
 

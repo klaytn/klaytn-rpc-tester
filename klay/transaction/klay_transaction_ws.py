@@ -1712,6 +1712,7 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_error_wrong_type_param6"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_error_wrong_type_param7"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_error_wrong_value_param1"))
+        suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_error_evm_revert_message"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_success1"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_success2"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_success3"))
@@ -1719,6 +1720,7 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_no_param"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_wrong_type_param1"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_wrong_type_param2"))
+        suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_evm_revert_message"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_success"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateComputationCost_success"))
 

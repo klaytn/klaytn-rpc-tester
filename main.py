@@ -759,4 +759,7 @@ if __name__ == "__main__":
 
     all_test_suite = unittest.TestSuite(suites)
 
-    runner.run(all_test_suite)
+    result = runner.run(all_test_suite)
+
+    if not result.wasSuccessful():
+        exit(1)
