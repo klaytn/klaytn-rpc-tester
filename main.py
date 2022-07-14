@@ -550,6 +550,27 @@ def makeTxData():
             },
             "result": {"hash": "", "blockHash": "", "blockNumber": "", "index": ""},
         },
+        {
+            "type": "TxTypeEthereumDynamicFee",
+            "tx": {
+                "typeInt": 30722,
+                "from": txFrom,
+                "to": txTo,
+                "gas": txGas,
+                "gasPrice": txGasPrice,
+                "value": txValueOne,
+                "accessList": [
+                    {
+		        "address": txFrom,
+		        "storageKeys": [
+                            "0x0000000000000000000000000000000000000000000000000000000000000003",
+                            "0x0000000000000000000000000000000000000000000000000000000000000007",
+		        ],
+                    },
+	        ],
+            },
+            "result": {"hash": "", "blockHash": "", "blockNumber": "", "index": ""},
+    },
     ]
     for tx in txs:
         if "FeeDelegated" in tx["type"]:
@@ -569,6 +590,8 @@ def makeTxData():
             tx["result"]["hash"] = result
         else:
             method = "klay_sendTransaction"
+            if "EthereumDynamicFee" in tx["type"]:
+                method = "eth_sendTransaction"
             params = [tx["tx"]]
             result, error = Utils.call_rpc("", method, params, log_path)
             assert error is None
