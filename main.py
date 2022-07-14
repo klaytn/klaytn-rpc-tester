@@ -557,8 +557,9 @@ def makeTxData():
                 "from": txFrom,
                 "to": txTo,
                 "gas": txGas,
-                "gasPrice": txGasPrice,
                 "value": txValueOne,
+                "maxFeePerGas": txGasPrice,
+                "maxPriorityFeePerGas": txGasPrice,
                 "accessList": [
                     {
 		        "address": txFrom,
@@ -590,8 +591,6 @@ def makeTxData():
             tx["result"]["hash"] = result
         else:
             method = "klay_sendTransaction"
-            if "EthereumDynamicFee" in tx["type"]:
-                method = "eth_sendTransaction"
             params = [tx["tx"]]
             result, error = Utils.call_rpc("", method, params, log_path)
             assert error is None

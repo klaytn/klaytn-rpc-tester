@@ -1416,8 +1416,9 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
             self.assertIsNone(error)
             self.assertIsNotNone(result)
             self.assertIsNotNone(result["gasPrice"])
-            self.assertIsNotNone(result["maxFeePerGas"])
-            self.assertIsNotNone(result["maxPriorityPerGas"])
+            if tx["type"] == 'TxTypeEthereumDynamicFee':
+                self.assertIsNotNone(result["maxFeePerGas"])
+                self.assertIsNotNone(result["maxPriorityFeePerGas"])
 
     def test_eth_fillTransaction_error_no_param(self):
 
