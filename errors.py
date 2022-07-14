@@ -100,6 +100,7 @@ errors_json = """
     "GivenBlockNotExisted": [-32000 ,"block with the given block number is not existed"],
     "GasTooLow": [-32000 ,"intrinsic gas too low"],
     "InvalidUnitPrice": [-32000 ,"invalid unit price"],
+    "InvalidGasPrice": [-32000 ,"invalid gas price"],
     "InsufficientFunds": [-32000 ,"insufficient funds of the sender for value "],
     "InsufficientBalance": [-32000 ,"insufficient balance for transfer "],
     "InsufficientBalanceFeePayer": [-32000, "insufficient balance of the fee payer to pay for gas"],
