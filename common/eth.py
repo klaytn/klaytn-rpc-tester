@@ -71,7 +71,6 @@ def checkEthereumBlockOrHeaderFormat(self, actualReturn):
     ETH_DIFFICULTY = "0x1"
 
     immutable_fields = {
-        "baseFeePerGas": ETH_BASEFEE_PER_GAS,
         "extraData": ETH_EXTRADATA,
         "sha3Uncles": ETH_SHA3_UNCLES,
         "mixHash": ETH_MIX_HASH,
