@@ -311,6 +311,7 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         params = [num, True]
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNotNone(result)
+        self.assertIsNotNone(result["baseFeePerGas"])
         blockHash = result["hash"]
 
         method = f"{self.ns}_getBlockByHash"
@@ -363,8 +364,9 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = [num, True]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        self.assertIsNotNone(result["baseFeePerGas"])
 
     def test_klay_getHeaderByHash_error_no_param(self):
 
@@ -408,6 +410,7 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         params = [num]
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNotNone(result)
+        self.assertIsNotNone(result["baseFeePerGas"])
         blockHash = result["hash"]
 
         method = f"{self.ns}_getHeaderByHash"
@@ -452,8 +455,9 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = [num]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        self.assertIsNotNone(result["baseFeePerGas"])
 
     def test_klay_getBlockWithConsensusInfoByHash_error_no_param(self):
 
@@ -492,17 +496,16 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
 
     def test_klay_getBlockWithConsensusInfoByHash_success(self):
 
-        method = f"{self.ns}_getBlockByNumber"
-        num = "latest"
-        params = [num, True]
-        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNotNone(result)
-        blockHash = result["hash"]
-
-        method = f"{self.ns}_getBlockWithConsensusInfoByHash"
-        params = [blockHash]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
+        txData = test_data_set["txData"]
+        for tx in txData:
+            blockHash = tx["result"]["blockHash"]
+            method = f"{self.ns}_getBlockWithConsensusInfoByHash"
+            params = [blockHash]
+            result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+            self.assertIsNone(error)
+            self.assertIsNotNone(result)
+            tx = result["transactions"][0]
+            self.assertIsNotNone(tx["gasPrice"])
 
     def test_klay_getBlockWithConsensusInfoByNumber_error_no_param(self):
 
@@ -529,11 +532,16 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
 
     def test_klay_getBlockWithConsensusInfoByNumber_success(self):
 
-        method = f"{self.ns}_getBlockWithConsensusInfoByNumber"
-        tag = "0x1"
-        params = [tag]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
+        txData = test_data_set["txData"]
+        for tx in txData:
+            blockNumber = tx["result"]["blockNumber"]
+            method = f"{self.ns}_getBlockWithConsensusInfoByNumber"
+            params = [blockNumber]
+            result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+            self.assertIsNone(error)
+            self.assertIsNotNone(result)
+            tx = result["transactions"][0]
+            self.assertIsNotNone(tx["gasPrice"])
 
     def test_klay_getCommittee_success_no_param(self):
 
