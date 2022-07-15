@@ -571,7 +571,7 @@ def makeTxData():
 	        ],
             },
             "result": {"hash": "", "blockHash": "", "blockNumber": "", "index": ""},
-    },
+        },
     ]
     for tx in txs:
         if "FeeDelegated" in tx["type"]:
@@ -589,6 +589,7 @@ def makeTxData():
             result, error = Utils.call_rpc("", method, params, log_path)
             assert error is None
             tx["result"]["hash"] = result
+
         else:
             method = "klay_sendTransaction"
             params = [tx["tx"]]
