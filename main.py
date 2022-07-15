@@ -75,6 +75,15 @@ from eth.filter import eth_filter_rpc
 from eth.filter import eth_filter_ws
 from eth.filter.eth_filter_rpc import TestEthNamespaceFilterRPC
 from eth.filter.eth_filter_ws import TestEthNamespaceFilterWS
+from eth.gas import eth_gas_rpc
+from eth.gas import eth_gas_ws
+from eth.gas.eth_gas_rpc import TestEthNamespaceGasRPC
+from eth.gas.eth_gas_ws import TestEthNamespaceGasWS
+from klay.gas import klay_gas_rpc
+from klay.gas import klay_gas_ws
+from klay.gas.klay_gas_rpc import TestKlayNamespaceGasRPC
+from klay.gas.klay_gas_ws import TestKlayNamespaceGasWS
+
 
 test_data_set = None
 config = None
@@ -148,6 +157,10 @@ decorate_all_functions(TestEthNamespaceTransactionRPC, my_decorator)
 decorate_all_functions(TestEthNamespaceTransactionWS, my_decorator)
 decorate_all_functions(TestEthNamespaceFilterRPC, my_decorator)
 decorate_all_functions(TestEthNamespaceFilterWS, my_decorator)
+decorate_all_functions(TestEthNamespaceGasRPC, my_decorator)
+decorate_all_functions(TestEthNamespaceGasWS, my_decorator)
+decorate_all_functions(TestKlayNamespaceGasRPC, my_decorator)
+decorate_all_functions(TestKlayNamespaceGasWS, my_decorator)
 
 
 def parse_arguments():
@@ -687,6 +700,10 @@ def inject_test_data_to_testcases():
     eth_transaction_ws.test_data_set = test_data_set
     eth_filter_rpc.test_data_set = test_data_set
     eth_filter_ws.test_data_set = test_data_set
+    eth_gas_rpc.test_data_set = test_data_set
+    eth_gas_ws.test_data_set = test_data_set
+    klay_gas_rpc.test_data_set = test_data_set
+    klay_gas_ws.test_data_set = test_data_set
 
 
 def load_test_suites():
@@ -734,6 +751,8 @@ def load_test_suites():
         ws_test_suites.append(TestKlayNamespaceTransactionWS.suite())
         rpc_test_suites.append(TestKlayNamespaceFilterRPC.suite())
         ws_test_suites.append(TestKlayNamespaceFilterWS.suite())
+        rpc_test_suites.append(TestKlayNamespaceGasRPC.suite())
+        ws_test_suites.append(TestKlayNamespaceGasWS.suite())
 
     if "eth" in namespaces:
         rpc_test_suites.append(TestEthNamespaceAccountRPC.suite())
@@ -748,6 +767,8 @@ def load_test_suites():
         ws_test_suites.append(TestEthNamespaceTransactionWS.suite())
         rpc_test_suites.append(TestEthNamespaceFilterRPC.suite())
         ws_test_suites.append(TestEthNamespaceFilterWS.suite())
+        rpc_test_suites.append(TestEthNamespaceGasRPC.suite())
+        ws_test_suites.append(TestEthNamespaceGasWS.suite())
 
 
 def initialize():

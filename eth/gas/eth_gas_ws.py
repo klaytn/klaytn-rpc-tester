@@ -6,7 +6,7 @@ from common import eth as eth_common
 global test_data_set
 
 
-class TestEthNamespaceGasRPC(unittest.TestCase):
+class TestEthNamespaceGasWS(unittest.TestCase):
     config = Utils.get_config()
     _, _, log_path = Utils.get_log_filename_with_path()
     endpoint = config.get("endpoint")
@@ -18,7 +18,7 @@ class TestEthNamespaceGasRPC(unittest.TestCase):
     def test_eth_maxPriorityFeePerGas_success(self):
 
         method = f"{self.ns}_maxPriorityFeePerGas"
-        result, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         self.assertEqual(test_data_set["unitGasPrice"], result)
         self.assertIsNone(error)
 
@@ -27,6 +27,6 @@ class TestEthNamespaceGasRPC(unittest.TestCase):
     def suite():
         suite = unittest.TestSuite()
 
-        suite.addTest(TestEthNamespaceGasRPC("test_eth_maxPriorityFeePerGas_success"))
+        suite.addTest(TestEthNamespaceGasWS("test_eth_maxPriorityFeePerGas_success"))
 
         return suite
