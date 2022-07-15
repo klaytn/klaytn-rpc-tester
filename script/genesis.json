@@ -4,12 +4,13 @@
         "istanbulCompatibleBlock": 0,
         "londonCompatibleBlock": 0,
         "ethTxTypeCompatibleBlock": 0,
+        "magmaCompatibleBlock": 0,
         "istanbul": {
             "epoch": 30,
             "policy": 2,
             "sub": 1
         },
-        "unitPrice": 750000000000,
+        "unitPrice": 25000000000,
         "deriveShaImpl": 2,
         "governance": {
             "governingNode": "0x9712f943b296758aaae79944ec975884188d3a96",
