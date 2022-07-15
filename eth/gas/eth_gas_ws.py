@@ -19,7 +19,14 @@ class TestEthNamespaceGasWS(unittest.TestCase):
 
         method = f"{self.ns}_maxPriorityFeePerGas"
         result, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        self.assertIsNone(error)
         self.assertEqual(test_data_set["unitGasPrice"], result)
+
+    def test_eth_feeHistory_success(self):
+
+        method = f"{self.ns}_feeHistory"
+        params = ["0x10", "latest", [20, 30, 50]]
+        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
 
@@ -28,5 +35,6 @@ class TestEthNamespaceGasWS(unittest.TestCase):
         suite = unittest.TestSuite()
 
         suite.addTest(TestEthNamespaceGasWS("test_eth_maxPriorityFeePerGas_success"))
+        suite.addTest(TestEthNamespaceGasWS("test_eth_feeHistory_success"))
 
         return suite
