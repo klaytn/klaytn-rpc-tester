@@ -1256,7 +1256,7 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
             "latest",
         ]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "CallerIsNotOwner", error)
+        Utils.check_error(self, "ExecutionReverted", error)
 
     def test_klay_call_error_insufficient_balance_feepayer(self):
 
@@ -1459,18 +1459,15 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         ownerContract = test_data_set["contracts"]["unknown"]["address"][0]
         notOwner = "0x15318f21f3dee6b2c64d2a633cb8c1194877c882"
         changeOwnerAbi = "0xa6f9dae10000000000000000000000003e2ac308cd78ac2fe162f9522deb2b56d9da9499"  # changeOwner("0x3e2ac308cd78ac2fe162f9522deb2b56d9da9499")
-        params = [
-            {"from": notOwner, "to": ownerContract, "data": changeOwnerAbi},
-            "latest",
-        ]
+        params = [{"from": notOwner, "to": ownerContract, "data": changeOwnerAbi}]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "CallerIsNotOwner", error)
+        Utils.check_error(self, "ExecutionReverted", error)
 
     def test_klay_estimateGas_error_revert(self):
 
         method = f"{self.ns}_estimateGas"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
-        params = [{"to": contract}, "latest"]
+        params = [{"to": contract}]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "ExecutionReverted", error)
 
