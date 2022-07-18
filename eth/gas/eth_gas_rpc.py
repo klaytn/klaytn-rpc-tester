@@ -25,9 +25,16 @@ class TestEthNamespaceGasRPC(unittest.TestCase):
     def test_eth_feeHistory_success(self):
 
         method = f"{self.ns}_feeHistory"
-        params = ["0x10", "latest", [20, 30, 50]]
+        blockCount = 3
+        lastBlock = "latest"
+        rewardPercentiles = [20, 30, 50]
+        params = [blockCount, lastBlock, rewardPercentiles]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        length = len(result["reward"])
+        self.assertLessEqual(length, blockCount)
+        self.assertEqual(length, len(result["gasUsedRatio"]))
+        self.assertEqual(length+1, len(result["baseFeePerGas"]))
 
 
     @staticmethod
