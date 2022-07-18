@@ -34,8 +34,7 @@ class TestEthNamespaceGasRPC(unittest.TestCase):
         length = len(result["reward"])
         self.assertLessEqual(length, blockCount)
         self.assertEqual(length, len(result["gasUsedRatio"]))
-        self.assertEqual(length+1, len(result["baseFeePerGas"]))
-
+        self.assertEqual(length + 1, len(result["baseFeePerGas"]))
 
     @staticmethod
     def suite():
