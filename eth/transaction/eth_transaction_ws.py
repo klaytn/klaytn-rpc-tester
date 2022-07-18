@@ -331,7 +331,7 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
             }
         ]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "InvalidUnitPrice", error)
+        Utils.check_error(self, "InvalidGasPrice", error)
 
     def test_eth_sendTransaction_error_wrong_value_param5(self):
 
@@ -1412,8 +1412,13 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
         txData = test_data_set["txData"]
         for tx in txData:
             params = [tx["result"]["hash"]]
-            _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+            result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
+            self.assertIsNotNone(result)
+            self.assertIsNotNone(result["gasPrice"])
+            if result["type"] == "0x2": # TxTypeEthereumDynamicFee
+                self.assertIsNotNone(result["maxFeePerGas"])
+                self.assertIsNotNone(result["maxPriorityFeePerGas"])
 
     def test_eth_fillTransaction_error_no_param(self):
 

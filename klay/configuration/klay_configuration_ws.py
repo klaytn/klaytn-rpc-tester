@@ -45,8 +45,9 @@ class TestKlayNamespaceConfigurationWS(unittest.TestCase):
     def test_klay_gasPrice_success(self):
 
         method = f"{self.ns}_gasPrice"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
+        self.assertEqual(result, test_data_set["unitGasPrice"])
 
     def test_klay_gasPriceAt_error_wrong_type_param(self):
 
@@ -72,8 +73,15 @@ class TestKlayNamespaceConfigurationWS(unittest.TestCase):
         self.assertIsNotNone(block_number)
 
         method = f"{self.ns}_gasPriceAt"
-        _, error = Utils.call_ws(self.endpoint, method, [block_number], self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, [block_number], self.log_path)
         self.assertIsNone(error)
+        self.assertEqual(result, test_data_set["unitGasPrice"])
+
+        method = f"{self.ns}_getBlockByNumber"
+        params = [block_number, False]
+        b, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+        self.assertEqual(b["baseFeePerGas"], result)
 
     def test_klay_isParallelDBWrite_success_wrong_value_param(self):
 

@@ -486,7 +486,7 @@ class TestPersonalNamespaceWS(unittest.TestCase):
             },
             password,
         )
-        Utils.check_error(self, "InvalidUnitPrice", error)
+        Utils.check_error(self, "InvalidGasPrice", error)
 
     def test_personal_sendTransaction_error_wrong_value_param5(self):
 

@@ -135,3 +135,19 @@ cat klay/filter/klay_filter_rpc.py \
 | sed "s/_, error = Utils.call_rpc/_, error = Utils.call_ws/g" \
 | sed "s/result, error = Utils.call_rpc/result, error = Utils.call_ws/g" \
 > klay/filter/klay_filter_ws.py
+
+cat eth/gas/eth_gas_rpc.py \
+| sed "s/NamespaceGasRPC/NamespaceGasWS/g" \
+| sed "s/WebSocket/RPC/g" \
+| sed "s/created_by_rpc/created_by_ws/g" \
+| sed "s/_, error = Utils.call_rpc/_, error = Utils.call_ws/g" \
+| sed "s/result, error = Utils.call_rpc/result, error = Utils.call_ws/g" \
+> eth/gas/eth_gas_ws.py
+
+cat klay/gas/klay_gas_rpc.py \
+| sed "s/NamespaceGasRPC/NamespaceGasWS/g" \
+| sed "s/WebSocket/RPC/g" \
+| sed "s/created_by_rpc/created_by_ws/g" \
+| sed "s/_, error = Utils.call_rpc/_, error = Utils.call_ws/g" \
+| sed "s/result, error = Utils.call_rpc/result, error = Utils.call_ws/g" \
+> klay/gas/klay_gas_ws.py

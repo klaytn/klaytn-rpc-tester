@@ -332,7 +332,7 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
             }
         ]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "InvalidUnitPrice", error)
+        Utils.check_error(self, "InvalidGasPrice", error)
 
     def test_klay_sendTransaction_error_wrong_value_param5(self):
 
@@ -672,8 +672,9 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
                 "nonce": nonce,
             }
         ]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        self.assertEqual(result["tx"]["gasPrice"], txGasPrice)
 
     def test_klay_sendRawTransaction_error_no_param(self):
 
@@ -936,7 +937,7 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         rawData = result["raw"]
         method = f"{self.ns}_sendRawTransaction"
         params = [rawData]
-        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        txHash, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_klay_getTransactionByBlockHashAndIndex_error_no_param(self):
@@ -972,8 +973,9 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         txData = test_data_set["txData"]
         for tx in txData:
             params = [tx["result"]["blockHash"], tx["result"]["index"]]
-            _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+            result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
+            self.assertIsNotNone(result["gasPrice"])
 
     def test_klay_getTransactionByBlockNumberAndIndex_error_no_param(self):
 
@@ -998,8 +1000,9 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         txData = test_data_set["txData"]
         for tx in txData:
             params = [tx["result"]["blockNumber"], tx["result"]["index"]]
-            _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+            result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
+            self.assertIsNotNone(result["gasPrice"])
 
     def test_klay_getTransactionReceipt_error_no_param(self):
 
@@ -1534,8 +1537,13 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         txData = test_data_set["txData"]
         for tx in txData:
             params = [tx["result"]["hash"]]
-            _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+            result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
+            self.assertIsNotNone(result)
+            self.assertIsNotNone(result["gasPrice"])
+            if result["typeInt"] == 30722: # TxTypeEthereumDynamicFee
+                self.assertIsNotNone(result["maxFeePerGas"])
+                self.assertIsNotNone(result["maxPriorityFeePerGas"])
 
     def test_klay_getTransactionBySenderTxHash_error_no_param(self):
 
