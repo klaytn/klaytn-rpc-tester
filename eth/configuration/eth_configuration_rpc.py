@@ -35,8 +35,9 @@ class TestEthNamespaceConfigurationRPC(unittest.TestCase):
     def test_eth_gasPrice_success(self):
 
         method = f"{self.ns}_gasPrice"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
+        result, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
+        self.assertEqual(result, test_data_set["unitGasPrice"])
 
     def test_eth_chainId_success(self):
 

@@ -367,6 +367,14 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
         self.assertIsNotNone(result["baseFeePerGas"])
+        self.assertEqual(result["baseFeePerGas"], test_data_set["unitGasPrice"])
+
+        # before kip71 hardfork
+        num = "0x1"
+        params = [num, True]
+        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+        self.assertEqual(result["baseFeePerGas"], "0x0")
 
     def test_klay_getHeaderByHash_error_no_param(self):
 

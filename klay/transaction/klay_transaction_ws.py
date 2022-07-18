@@ -672,8 +672,9 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
                 "nonce": nonce,
             }
         ]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        self.assertEqual(result["tx"]["gasPrice"], txGasPrice)
 
     def test_klay_sendRawTransaction_error_no_param(self):
 
