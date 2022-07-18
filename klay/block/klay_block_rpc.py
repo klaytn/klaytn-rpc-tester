@@ -367,6 +367,14 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
         self.assertIsNotNone(result["baseFeePerGas"])
+        self.assertEqual(result["baseFeePerGas"], test_data_set["unitGasPrice"])
+
+        # before kip71 hardfork
+        num = "0x1"
+        params = [num, True]
+        result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+        self.assertEqual(result["baseFeePerGas"], "0x0")
 
     def test_klay_getHeaderByHash_error_no_param(self):
 
@@ -667,6 +675,30 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
+    def test_klay_gasPrice_success(self):
+
+        method = f"{self.ns}_gasPrice"
+        params = []
+        result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+        self.assertEqual(result, test_data_set["unitGasPrice"])
+
+    def test_klay_gasPriceAt_success(self):
+
+        method = f"{self.ns}_gasPriceAt"
+        tag = "0x10"
+        params = [tag]
+        result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+        self.assertEqual(result, test_data_set["unitGasPrice"])
+
+        method = f"{self.ns}_getBlockByNumber"
+        tag = "0x10"
+        params = [tag, False]
+        b, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+        self.assertEqual(b["baseFeePerGas"], result)
+
     @staticmethod
     def suite():
         suite = unittest.TestSuite()
@@ -756,5 +788,8 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         suite.addTest(TestKlayNamespaceBlockRPC("test_klay_getCouncilSize_error_wrong_value_param"))
 
         suite.addTest(TestKlayNamespaceBlockRPC("test_klay_getCouncilSize_success"))
+
+        suite.addTest(TestKlayNamespaceBlockRPC("test_klay_gasPrice_success"))
+        suite.addTest(TestKlayNamespaceBlockRPC("test_klay_gasPriceAt_success"))
 
         return suite
