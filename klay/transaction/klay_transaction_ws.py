@@ -1541,7 +1541,7 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
             self.assertIsNone(error)
             self.assertIsNotNone(result)
             self.assertIsNotNone(result["gasPrice"])
-            if result["typeInt"] == 30722: # TxTypeEthereumDynamicFee
+            if result["typeInt"] == 30722:  # TxTypeEthereumDynamicFee
                 self.assertIsNotNone(result["maxFeePerGas"])
                 self.assertIsNotNone(result["maxPriorityFeePerGas"])
 

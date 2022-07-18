@@ -1416,7 +1416,7 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
             self.assertIsNone(error)
             self.assertIsNotNone(result)
             self.assertIsNotNone(result["gasPrice"])
-            if result["type"] == "0x2": # TxTypeEthereumDynamicFee
+            if result["type"] == "0x2":  # TxTypeEthereumDynamicFee
                 self.assertIsNotNone(result["maxFeePerGas"])
                 self.assertIsNotNone(result["maxPriorityFeePerGas"])
 

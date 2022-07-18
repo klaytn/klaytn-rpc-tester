@@ -575,13 +575,13 @@ def makeTxData():
                 "maxPriorityFeePerGas": txGasPrice,
                 "accessList": [
                     {
-		        "address": txFrom,
-		        "storageKeys": [
+                        "address": txFrom,
+                        "storageKeys": [
                             "0x0000000000000000000000000000000000000000000000000000000000000003",
                             "0x0000000000000000000000000000000000000000000000000000000000000007",
-		        ],
+                        ],
                     },
-	        ],
+                ],
             },
             "result": {"hash": "", "blockHash": "", "blockNumber": "", "index": ""},
         },
