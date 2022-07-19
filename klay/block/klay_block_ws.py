@@ -310,6 +310,7 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         num = "latest"
         params = [num, True]
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
         self.assertIsNotNone(result)
         self.assertIsNotNone(result["baseFeePerGas"])
         blockHash = result["hash"]
@@ -318,6 +319,8 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         params = [blockHash, True]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        self.assertIsNotNone(result)
+        self.assertIsNotNone(result["baseFeePerGas"])
 
     def test_klay_getBlockByNumber_error_no_param(self):
 
@@ -417,14 +420,17 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         num = "latest"
         params = [num]
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
         self.assertIsNotNone(result)
         self.assertIsNotNone(result["baseFeePerGas"])
         blockHash = result["hash"]
 
         method = f"{self.ns}_getHeaderByHash"
         params = [blockHash]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        self.assertIsNotNone(result)
+        self.assertIsNotNone(result["baseFeePerGas"])
 
     def test_klay_getHeaderByNumber_error_no_param(self):
 

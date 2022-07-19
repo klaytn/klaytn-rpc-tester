@@ -296,13 +296,17 @@ class TestEthNamespaceBlockWS(unittest.TestCase):
         num = "latest"
         params = [num, True]
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
         self.assertIsNotNone(result)
+        self.assertIsNotNone(result["baseFeePerGas"])
         blockHash = result["hash"]
 
         method = f"{self.ns}_getBlockByHash"
         params = [blockHash, True]
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
+        self.assertIsNotNone(result)
+        self.assertIsNotNone(result["baseFeePerGas"])
         eth_common.checkEthereumBlockOrHeaderFormat(self, result)
 
     def test_eth_getBlockByNumber_error_no_param(self):
