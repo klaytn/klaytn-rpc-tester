@@ -311,16 +311,14 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         params = [num, True]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        self.assertIsNotNone(result)
-        self.assertIsNotNone(result["baseFeePerGas"])
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result)
         blockHash = result["hash"]
 
         method = f"{self.ns}_getBlockByHash"
         params = [blockHash, True]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        self.assertIsNotNone(result)
-        self.assertIsNotNone(result["baseFeePerGas"])
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result)
 
     def test_klay_getBlockByNumber_error_no_param(self):
 
@@ -369,15 +367,16 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         params = [num, True]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        self.assertIsNotNone(result["baseFeePerGas"])
-        self.assertEqual(result["baseFeePerGas"], test_data_set["unitGasPrice"])
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result, test_data_set["unitGasPrice"])
+        #self.assertEqual(result["baseFeePerGas"], test_data_set["unitGasPrice"])
 
         # before kip71 hardfork
         num = "0x1"
         params = [num, True]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        self.assertEqual(result["baseFeePerGas"], "0x0")
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result, "0x0")
+        #self.assertEqual(result["baseFeePerGas"], "0x0")
 
     def test_klay_getHeaderByHash_error_no_param(self):
 
@@ -421,16 +420,14 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         params = [num]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        self.assertIsNotNone(result)
-        self.assertIsNotNone(result["baseFeePerGas"])
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result)
         blockHash = result["hash"]
 
         method = f"{self.ns}_getHeaderByHash"
         params = [blockHash]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        self.assertIsNotNone(result)
-        self.assertIsNotNone(result["baseFeePerGas"])
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result)
 
     def test_klay_getHeaderByNumber_error_no_param(self):
 
@@ -471,7 +468,7 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         params = [num]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        self.assertIsNotNone(result["baseFeePerGas"])
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result)
 
     def test_klay_getBlockWithConsensusInfoByHash_error_no_param(self):
 

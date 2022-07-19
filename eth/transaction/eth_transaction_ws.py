@@ -1416,10 +1416,7 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
             result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
             self.assertIsNotNone(result)
-            self.assertIsNotNone(result["gasPrice"])
-            if result["type"] == "0x2":  # TxTypeEthereumDynamicFee
-                self.assertIsNotNone(result["maxFeePerGas"])
-                self.assertIsNotNone(result["maxPriorityFeePerGas"])
+            eth_common.checkGasPriceField(self, result)
 
     def test_eth_fillTransaction_error_no_param(self):
 

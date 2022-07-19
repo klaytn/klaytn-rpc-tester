@@ -975,7 +975,7 @@ class TestKlayNamespaceTransactionRPC(unittest.TestCase):
             params = [tx["result"]["blockHash"], tx["result"]["index"]]
             result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
-            self.assertIsNotNone(result["gasPrice"])
+            klay_common.checkGasPriceField(self, result)
 
     def test_klay_getTransactionByBlockNumberAndIndex_error_no_param(self):
 
@@ -1002,7 +1002,7 @@ class TestKlayNamespaceTransactionRPC(unittest.TestCase):
             params = [tx["result"]["blockNumber"], tx["result"]["index"]]
             result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
-            self.assertIsNotNone(result["gasPrice"])
+            klay_common.checkGasPriceField(self, result)
 
     def test_klay_getTransactionReceipt_error_no_param(self):
 
@@ -1033,7 +1033,7 @@ class TestKlayNamespaceTransactionRPC(unittest.TestCase):
             params = [tx["result"]["hash"]]
             result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
-            self.assertIsNotNone(result["gasPrice"])
+            klay_common.checkGasPriceField(self, result)
             self.assertIsNotNone(result["effectiveGasPrice"])
 
     def test_klay_call_error_no_param1(self):
@@ -1542,10 +1542,7 @@ class TestKlayNamespaceTransactionRPC(unittest.TestCase):
             result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
             self.assertIsNotNone(result)
-            self.assertIsNotNone(result["gasPrice"])
-            if result["typeInt"] == 30722:  # TxTypeEthereumDynamicFee
-                self.assertIsNotNone(result["maxFeePerGas"])
-                self.assertIsNotNone(result["maxPriorityFeePerGas"])
+            klay_common.checkGasPriceField(self, result)
 
     def test_klay_getTransactionBySenderTxHash_error_no_param(self):
 
