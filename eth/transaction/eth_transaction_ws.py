@@ -904,8 +904,9 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
         txData = test_data_set["txData"]
         for tx in txData:
             params = [tx["result"]["hash"]]
-            _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+            result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
             self.assertIsNone(error)
+            self.assertIsNotNone(result["effectiveGasPrice"])
 
     def test_eth_call_error_no_param1(self):
 
