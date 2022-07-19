@@ -28,3 +28,15 @@ def get_block_number(endpoint):
     method = "klay_blockNumber"
     block_number, _ = Utils.call_rpc(endpoint, method, ["latest", True], log_path)
     return block_number
+
+def checkBaseFeePerGasFieldAndValue(self, result, value = ""):
+    self.assertIsNotNone(result)
+    self.assertIsNotNone(result["baseFeePerGas"])
+    if value != "":
+        self.assertEqual(result["baseFeePerGas"], value)
+
+def checkGasPriceField(self, result):
+    self.assertIsNotNone(result["gasPrice"])
+    if result["typeInt"] == 30722:  # TxTypeEthereumDynamicFee
+        self.assertIsNotNone(result["maxFeePerGas"])
+        self.assertIsNotNone(result["maxPriorityFeePerGas"])
