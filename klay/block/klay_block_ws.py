@@ -367,8 +367,7 @@ class TestKlayNamespaceBlockWS(unittest.TestCase):
         params = [num, True]
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
-        klay_common.checkBaseFeePerGasFieldAndValue(self, result, test_data_set["unitGasPrice"])
-        #self.assertEqual(result["baseFeePerGas"], test_data_set["unitGasPrice"])
+        klay_common.checkBaseFeePerGasFieldAndValue(self, result)
 
         # before kip71 hardfork
         num = "0x1"

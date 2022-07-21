@@ -45,9 +45,8 @@ class TestKlayNamespaceConfigurationRPC(unittest.TestCase):
     def test_klay_gasPrice_success(self):
 
         method = f"{self.ns}_gasPrice"
-        result, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
+        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
-        self.assertEqual(result, test_data_set["unitGasPrice"])
 
     def test_klay_gasPriceAt_error_wrong_type_param(self):
 
@@ -75,7 +74,6 @@ class TestKlayNamespaceConfigurationRPC(unittest.TestCase):
         method = f"{self.ns}_gasPriceAt"
         result, error = Utils.call_rpc(self.endpoint, method, [block_number], self.log_path)
         self.assertIsNone(error)
-        self.assertEqual(result, test_data_set["unitGasPrice"])
 
         method = f"{self.ns}_getBlockByNumber"
         params = [block_number, False]
@@ -159,7 +157,6 @@ class TestKlayNamespaceConfigurationRPC(unittest.TestCase):
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_error_wrong_type_param"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_error_wrong_value_param"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_success_no_param"))
-        suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_success"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_isParallelDBWrite_success_wrong_value_param"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_isParallelDBWrite_success"))
         suite.addTest(
