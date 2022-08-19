@@ -434,7 +434,7 @@ class TestDebugNamespaceRPC(unittest.TestCase):
 
         method = f"{self.ns}_traceBlockByNumber"
         _, error = Utils.call_rpc(self.endpoint, method, ["0xffffffff"], self.log_path)
-        Utils.check_error(self, "BlockNotFound", error)
+        Utils.check_error(self, "BlockNotExist", error)
 
     def test_debug_traceBlockByNumber_success(self):
 
@@ -466,7 +466,7 @@ class TestDebugNamespaceRPC(unittest.TestCase):
         method = f"{self.ns}_traceBlockByHash"
         _, error = Utils.call_rpc(self.endpoint, method, [invalid_block_hash], self.log_path)
         self.assertEqual(-32000, error.get("code"))
-        self.assertEqual(f"block #{invalid_block_hash[2:]} not found", error.get("message"))
+        self.assertEqual(f"the block does not exist (block hash: " + invalid_block_hash+")", error.get("message"))
 
     def test_debug_traceBlockByHash_success(self):
 
