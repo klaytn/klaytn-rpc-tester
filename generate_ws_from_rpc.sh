@@ -153,10 +153,10 @@ cat klay/gas/klay_gas_rpc.py \
 > klay/gas/klay_gas_ws.py
 
 
-cat unsafe_debug/unsafe_debug_rpc.py \
+cat unsafedebug/unsafedebug_rpc.py \
 | sed "s/NamespaceRPC/NamespaceWS/g" \
 | sed "s/WebSocket/RPC/g" \
 | sed "s/created_by_rpc/created_by_ws/g" \
 | sed "s/_, error = Utils.call_rpc/_, error = Utils.call_ws/g" \
 | sed "s/result, error = Utils.call_rpc/result, error = Utils.call_ws/g" \
-> unsafe_debug/unsafe_debug_ws.py
+> unsafedebug/unsafedebug_ws.py
