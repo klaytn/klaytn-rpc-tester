@@ -113,7 +113,6 @@ class TestUnsafeDebugNamespaceRPC(unittest.TestCase):
         self.assertEqual(-32000, error.get("code"))
         self.assertEqual("expect file.go:234", error.get("message"))
 
-
     def test_unsafedebug_traceBlockFromFile_error_no_param(self):
 
         method = f"{self.ns}_traceBlockFromFile"
