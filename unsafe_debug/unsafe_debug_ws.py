@@ -113,6 +113,156 @@ class TestUnsafeDebugNamespaceWS(unittest.TestCase):
         self.assertEqual(-32000, error.get("code"))
         self.assertEqual("expect file.go:234", error.get("message"))
 
+    def test_unsafedebug_traceBlock_success(self):
+
+        block_number = klay_common.get_block_number(self.endpoint)
+        block_number = int(block_number, 0)
+
+        method = "debug_getBlockRlp"
+        result, error = Utils.call_ws(self.endpoint, method, [block_number], self.log_path)
+        block_rlp = "0x" + result
+
+        method = f"{self.ns}_traceBlock"
+        _, error = Utils.call_ws(self.endpoint, method, [block_rlp], self.log_path)
+        self.assertIsNone(error)
+
+    def test_unsafedebug_traceBlock_error_no_param(self):
+
+        method = f"{self.ns}_traceBlock"
+        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        Utils.check_error(self, "arg0NoParams", error)
+
+    def test_unsafedebug_traceBlock_error_wrong_type_param(self):
+
+        method = f"{self.ns}_traceBlock"
+        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
+        Utils.check_error(self, "arg0HexToBytes", error)
+
+    def test_unsafedebug_traceBlock_error_wrong_value_param(self):
+
+        method = f"{self.ns}_traceBlock"
+        _, error = Utils.call_ws(self.endpoint, method, ["0xffff"], self.log_path)
+        Utils.check_error(self, "CouldNotDecodeBlock", error)
+
+    def test_unsafedebug_traceBlockByNumber_error_no_param(self):
+
+        method = f"{self.ns}_traceBlockByNumber"
+        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        Utils.check_error(self, "arg0NoParams", error)
+
+    def test_unsafedebug_traceBlockByNumber_error_wrong_type_param(self):
+
+        method = f"{self.ns}_traceBlockByNumber"
+        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
+        Utils.check_error(self, "arg0HexWithoutPrefix", error)
+
+    def test_unsafedebug_traceBlockByNumber_error_wrong_value_param(self):
+
+        method = f"{self.ns}_traceBlockByNumber"
+        _, error = Utils.call_ws(self.endpoint, method, ["0xffffffff"], self.log_path)
+        Utils.check_error(self, "BlockNotExist", error)
+
+    def test_unsafedebug_traceBlockByNumber_success(self):
+
+        block_number = klay_common.get_block_number(self.endpoint)
+        block_number = int(block_number, 0)
+
+        method = f"{self.ns}_traceBlockByNumber"
+        _, error = Utils.call_ws(self.endpoint, method, [block_number], self.log_path)
+        self.assertIsNone(error)
+
+    def test_unsafedebug_traceBlockByHash_error_no_param(self):
+
+        method = f"{self.ns}_traceBlockByHash"
+        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        Utils.check_error(self, "arg0NoParams", error)
+
+    def test_unsafedebug_traceBlockByHash_error_wrong_type_param(self):
+
+        method = f"{self.ns}_traceBlockByHash"
+        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
+        Utils.check_error(self, "arg0HexToHash", error)
+
+    def test_unsafedebug_traceBlockByHash_error_wrong_value_param(self):
+
+        latest_block = klay_common.get_latest_block_by_number(self.endpoint)
+        block_hash = latest_block["hash"]
+        invalid_block_hash = block_hash[:-3] + "fff"
+
+        method = f"{self.ns}_traceBlockByHash"
+        _, error = Utils.call_ws(self.endpoint, method, [invalid_block_hash], self.log_path)
+        self.assertEqual(-32000, error.get("code"))
+        self.assertEqual(f"the block does not exist (block hash: " + invalid_block_hash + ")", error.get("message"))
+
+    def test_unsafedebug_traceBlockByHash_success(self):
+
+        latest_block = klay_common.get_latest_block_by_number(self.endpoint)
+        block_hash = latest_block["hash"]
+
+        method = f"{self.ns}_traceBlockByHash"
+        _, error = Utils.call_ws(self.endpoint, method, [block_hash], self.log_path)
+        self.assertIsNone(error)
+
+    def test_unsafedebug_traceTransaction_error_no_param(self):
+
+        method = f"{self.ns}_traceTransaction"
+        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        Utils.check_error(self, "arg0NoParams", error)
+
+    def test_unsafedebug_traceTransaction_error_wrong_type_param1(self):
+
+        method = f"{self.ns}_traceTransaction"
+        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
+        Utils.check_error(self, "arg0HexToHash", error)
+
+    def test_unsafedebug_traceTransaction_error_wrong_value_param1(self):
+
+        method = f"{self.ns}_traceTransaction"
+        _, error = Utils.call_ws(
+            self.endpoint,
+            method,
+            ["0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"],
+            self.log_path,
+        )
+        Utils.check_error(self, "TransactionNotFound", error)
+
+    def send_transaction(self, data=""):
+        sender = test_data_set["account"]["sender"]["address"]
+        password = test_data_set["account"]["sender"]["password"]
+        to = test_data_set["account"]["receiver"]["address"]
+        tx_fields = {
+            "from": sender,
+            "to": to,
+            "gas": hex(304000),
+            "gasPrice": test_data_set["unitGasPrice"],
+            "value": hex(Utils.to_peb(1.5)),
+        }
+        if data != "":
+            tx_fields["data"] = data
+        params = [tx_fields, password]
+        transaction_hash, error = personal_common.send_transaction(self.endpoint, params)
+        Utils.waiting_count("Waiting for", self.waiting_count, "seconds until tx is finalized.")
+        self.assertIsNone(error)
+        return transaction_hash
+
+    def test_unsafedebug_traceTransaction_error_wrong_value_param2(self):
+
+        transaction_hash = self.send_transaction()
+        invalid_tx_hash = transaction_hash[:-3] + "fff"
+
+        method = f"{self.ns}_traceTransaction"
+        _, error = Utils.call_ws(self.endpoint, method, [invalid_tx_hash], self.log_path)
+        self.assertEqual(-32000, error.get("code"))
+        self.assertEqual(f"transaction {invalid_tx_hash[2:]} not found", error.get("message"))
+
+    def test_unsafedebug_traceTransaction_success(self):
+
+        transaction_hash = self.send_transaction()
+
+        method = f"{self.ns}_traceTransaction"
+        _, error = Utils.call_ws(self.endpoint, method, [transaction_hash], self.log_path)
+        self.assertIsNone(error)
+
     def test_unsafedebug_traceBlockFromFile_error_no_param(self):
 
         method = f"{self.ns}_traceBlockFromFile"
@@ -560,6 +710,37 @@ class TestUnsafeDebugNamespaceWS(unittest.TestCase):
         _, error = Utils.call_ws(self.endpoint, method, [90], self.log_path)
         self.assertIsNone(error)
 
+    def test_unsafedebug_standardTraceBlockToFile_error_no_param(self):
+
+        method = f"{self.ns}_standardTraceBlockToFile"
+        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        Utils.check_error(self, "arg0NoParams", error)
+
+    def test_unsafedebug_standardTraceBlockToFile_error_wrong_type_param(self):
+
+        method = f"{self.ns}_standardTraceBlockToFile"
+        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
+        Utils.check_error(self, "arg0NonstringToHash", error)
+
+    def test_unsafedebug_standardTraceBlockToFile_error_wrong_value_param(self):
+
+        latest_block = klay_common.get_latest_block_by_number(self.endpoint)
+        invalid_block_hash = latest_block["hash"][:-3] + "fff"
+
+        method = f"{self.ns}_standardTraceBlockToFile"
+        _, error = Utils.call_ws(self.endpoint, method, [invalid_block_hash], self.log_path)
+        self.assertEqual(-32000, error.get("code"))
+        self.assertEqual(f"block {invalid_block_hash[2:]} not found", error.get("message"))
+
+    def test_unsafedebug_standardTraceBlockToFile_success(self):
+
+        latest_block = klay_common.get_latest_block_by_number(self.endpoint)
+        block_hash = latest_block["hash"]
+
+        method = f"{self.ns}_standardTraceBlockToFile"
+        _, error = Utils.call_ws(self.endpoint, method, [block_hash], self.log_path)
+        self.assertIsNone(error)
+
     def test_unsafedebug_traceBadBlock_success(self):
         # TODO: Original code of this test case was basically same with test_unsafedebug_standardTraceBlockToFile_success
         # We need to implement this test case correctly.
@@ -652,9 +833,30 @@ class TestUnsafeDebugNamespaceWS(unittest.TestCase):
         suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_setGCPercent_error_no_param"))
         suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_setGCPercent_error_wrong_type_param"))
         suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_setGCPercent_success"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlock_success"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlock_error_no_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlock_error_wrong_type_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlock_error_wrong_value_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByNumber_error_no_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByNumber_error_wrong_type_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByNumber_error_wrong_value_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByNumber_success"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByHash_error_no_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByHash_error_wrong_type_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByHash_error_wrong_value_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockByHash_success"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceTransaction_error_no_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceTransaction_error_wrong_type_param1"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceTransaction_error_wrong_value_param1"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceTransaction_error_wrong_value_param2"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceTransaction_success"))
         suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockFromFile_error_no_param"))
         suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockFromFile_error_wrong_type_param"))
         suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockFromFile_error_wrong_value_param"))
         suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_traceBlockFromFile_success"))
-
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_standardTraceBlockToFile_error_no_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_standardTraceBlockToFile_error_wrong_type_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_standardTraceBlockToFile_error_wrong_value_param"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_standardTraceBlockToFile_success"))
+        suite.addTest(TestUnsafeDebugNamespaceWS("test_unsafedebug_standardTraceBadBlockToFile_success"))
         return suite

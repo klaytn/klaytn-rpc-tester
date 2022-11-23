@@ -425,88 +425,7 @@ class TestDebugNamespaceRPC(unittest.TestCase):
         _, error = Utils.call_rpc(self.endpoint, method, [transaction_hash], self.log_path)
         self.assertIsNone(error)
 
-    def test_debug_preimage_success(self):
-
-        # The data generate a contract executing sha3('1234') which will be used to test 'debug_preimage'
-        data = "0x608060405234801561001057600080fd5b5060405180807f3132333400000000000000000000000000000000000000000000000000000000815250600401905060405180910390206000816000191690555060a98061005f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063d46300fd146044575b600080fd5b348015604f57600080fd5b5060566074565b60405180826000191660001916815260200191505060405180910390f35b600080549050905600a165627a7a723058204ebeb407a746293d3b9db38453f9ae086ea38ff3e45ce95c45d27fa2c93259900029"
-        transaction_hash = self.send_transaction(data)
-        self.assertIsNotNone(transaction_hash)
-
-        method = f"{self.ns}_preimage"
-        # The hash value of sha3('1234')
-        sha3_hash = "0x387a8233c96e1fc0ad5e284353276177af2186e7afa85296f106336e376669f7"
-        _, error = Utils.call_rpc(self.endpoint, method, [sha3_hash], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_startGoTrace_error_no_param(self):
-
-        method = f"{self.ns}_startGoTrace"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_startGoTrace_success(self):
-
-        method = f"{self.ns}_startGoTrace"
-        profileFile = "start_go_30s_created_by_rpc.trace"
-        _, error = Utils.call_rpc(self.endpoint, method, [profileFile], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_startGoTrace_error_already_in_progress(self):
-
-        method = f"{self.ns}_startGoTrace"
-        profileFile = "start_go_30s_created_by_rpc.trace"
-        _, error = Utils.call_rpc(self.endpoint, method, [profileFile], self.log_path)
-        Utils.check_error(self, "TraceAlreadyInProgress", error)
-
-    def test_debug_stopGoTrace_success(self):
-
-        method = f"{self.ns}_stopGoTrace"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_stopGoTrace_error_not_in_progress(self):
-
-        method = f"{self.ns}_stopGoTrace"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "TraceNotInProgress", error)
-
-    def test_debug_standardTraceBlockToFile_error_no_param(self):
-
-        method = f"{self.ns}_standardTraceBlockToFile"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_standardTraceBlockToFile_error_wrong_type_param(self):
-
-        method = f"{self.ns}_standardTraceBlockToFile"
-        _, error = Utils.call_rpc(self.endpoint, method, [1234], self.log_path)
-        Utils.check_error(self, "arg0NonstringToHash", error)
-
-    def test_debug_standardTraceBlockToFile_error_wrong_value_param(self):
-
-        latest_block = klay_common.get_latest_block_by_number(self.endpoint)
-        invalid_block_hash = latest_block["hash"][:-3] + "fff"
-
-        method = f"{self.ns}_standardTraceBlockToFile"
-        _, error = Utils.call_rpc(self.endpoint, method, [invalid_block_hash], self.log_path)
-        self.assertEqual(-32000, error.get("code"))
-        self.assertEqual(f"block {invalid_block_hash[2:]} not found", error.get("message"))
-
-    def test_debug_standardTraceBlockToFile_success(self):
-
-        latest_block = klay_common.get_latest_block_by_number(self.endpoint)
-        block_hash = latest_block["hash"]
-
-        method = f"{self.ns}_standardTraceBlockToFile"
-        _, error = Utils.call_rpc(self.endpoint, method, [block_hash], self.log_path)
-        self.assertIsNone(error)
-
     def test_debug_traceBadBlock_success(self):
-        # TODO: Original code of this test case was basically same with test_debug_standardTraceBlockToFile_success
-        # We need to implement this test case correctly.
-        pass
-
-    def test_debug_standardTraceBadBlockToFile_success(self):
         # TODO: Original code of this test case was basically same with test_debug_standardTraceBlockToFile_success
         # We need to implement this test case correctly.
         pass
@@ -551,14 +470,6 @@ class TestDebugNamespaceRPC(unittest.TestCase):
         suite.addTest(TestDebugNamespaceRPC("test_debug_traceTransaction_error_wrong_value_param1"))
         suite.addTest(TestDebugNamespaceRPC("test_debug_traceTransaction_error_wrong_value_param2"))
         suite.addTest(TestDebugNamespaceRPC("test_debug_traceTransaction_success"))
-        """
-        suite.addTest(TestDebugNamespaceRPC("test_debug_preimage_success"))
-        """
-        suite.addTest(TestDebugNamespaceRPC("test_debug_standardTraceBlockToFile_error_no_param"))
-        suite.addTest(TestDebugNamespaceRPC("test_debug_standardTraceBlockToFile_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceRPC("test_debug_standardTraceBlockToFile_error_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceRPC("test_debug_standardTraceBlockToFile_success"))
         suite.addTest(TestDebugNamespaceRPC("test_debug_traceBadBlock_success"))
-        suite.addTest(TestDebugNamespaceRPC("test_debug_standardTraceBadBlockToFile_success"))
 
         return suite
