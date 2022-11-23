@@ -15,6 +15,10 @@ from debug import debug_rpc
 from debug import debug_ws
 from debug.debug_rpc import TestDebugNamespaceRPC
 from debug.debug_ws import TestDebugNamespaceWS
+from unsafedebug import unsafedebug_rpc
+from unsafedebug import unsafedebug_ws
+from unsafedebug.unsafedebug_rpc import TestUnsafeDebugNamespaceRPC
+from unsafedebug.unsafedebug_ws import TestUnsafeDebugNamespaceWS
 from net import net_rpc
 from net import net_ws
 from net.net_rpc import TestNetNamespaceRPC
@@ -127,6 +131,8 @@ decorate_all_functions(TestAdminNamespaceRPC, my_decorator)
 decorate_all_functions(TestAdminNamespaceWS, my_decorator)
 decorate_all_functions(TestDebugNamespaceRPC, my_decorator)
 decorate_all_functions(TestDebugNamespaceWS, my_decorator)
+decorate_all_functions(TestUnsafeDebugNamespaceRPC, my_decorator)
+decorate_all_functions(TestUnsafeDebugNamespaceWS, my_decorator)
 decorate_all_functions(TestNetNamespaceRPC, my_decorator)
 decorate_all_functions(TestNetNamespaceWS, my_decorator)
 decorate_all_functions(TestPersonalNamespaceRPC, my_decorator)
@@ -670,6 +676,8 @@ def inject_test_data_to_testcases():
     admin_ws.test_data_set = test_data_set
     debug_rpc.test_data_set = test_data_set
     debug_ws.test_data_set = test_data_set
+    unsafedebug_rpc.test_data_set = test_data_set
+    unsafedebug_ws.test_data_set = test_data_set
     net_rpc.test_data_set = test_data_set
     net_ws.test_data_set = test_data_set
     personal_rpc.test_data_set = test_data_set
@@ -715,7 +723,7 @@ def load_test_suites():
     rpc_test_suites = list()
     ws_test_suites = list()
 
-    namespaces = config.get("namespaces", "admin,debug,eth,governance,klay,net,personal,txpool")
+    namespaces = config.get("namespaces", "admin,debug,unsafedebug,eth,governance,klay,net,personal,txpool")
     namespaces = namespaces.split(",")
 
     if "admin" in namespaces:
@@ -725,6 +733,10 @@ def load_test_suites():
     if "debug" in namespaces:
         rpc_test_suites.append(TestDebugNamespaceRPC.suite())
         ws_test_suites.append(TestDebugNamespaceWS.suite())
+
+    if "unsafedebug" in namespaces:
+        rpc_test_suites.append(TestUnsafeDebugNamespaceRPC.suite())
+        ws_test_suites.append(TestUnsafeDebugNamespaceWS.suite())
 
     if "net" in namespaces:
         rpc_test_suites.append(TestNetNamespaceRPC.suite())
