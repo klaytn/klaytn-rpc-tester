@@ -18,63 +18,6 @@ class TestDebugNamespaceRPC(unittest.TestCase):
     ns = "debug"
     waiting_count = 2
 
-    def create_params_for_starting_pprof(self):
-        ip_address = "0.0.0.0"
-        port = 6060
-        return [ip_address, port]
-
-    def test_debug_startPProf_error_wrong_type_param1(self):
-
-        method = f"{self.ns}_startPProf"
-        params = self.create_params_for_starting_pprof()
-        params[0] = 1234  # Invlaid ip address
-        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_startPProf_error_wrong_type_param2(self):
-
-        method = f"{self.ns}_startPProf"
-        params = self.create_params_for_starting_pprof()
-        params[1] = "6060"  # Invlaid port
-        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg1StringToInt", error)
-
-    def test_debug_startPProf_success_no_param(self):
-
-        method = f"{self.ns}_startPProf"
-        _, error = Utils.call_rpc(self.endpoint, method, None, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_startPProf_error_already_running(self):
-
-        method = f"{self.ns}_startPProf"
-        params = self.create_params_for_starting_pprof()
-        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "PProfServerAlreadyRunning", error)
-
-    def test_debug_stopPProf_success(self):
-
-        method = f"{self.ns}_stopPProf"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_stopPProf_error_not_running(self):
-
-        method = f"{self.ns}_stopPProf"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "PProfServerNotRunning", error)
-
-    def test_debug_startPProf_success(self):
-
-        method = f"{self.ns}_startPProf"
-        params = self.create_params_for_starting_pprof()
-        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
-        # Stop pprof server for further tests
-        method = f"{self.ns}_stopPProf"
-        Utils.call_ws(self.endpoint, method, [], self.log_path)
-
     def test_debug_getModifiedAccountsByHash_error_no_param1(self):
 
         method = f"{self.ns}_getModifiedAccountsByHash"
