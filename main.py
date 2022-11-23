@@ -723,7 +723,7 @@ def load_test_suites():
     rpc_test_suites = list()
     ws_test_suites = list()
 
-    namespaces = config.get("namespaces", "admin,debug,unsafe_debug,eth,governance,klay,net,personal,txpool")
+    namespaces = config.get("namespaces", "admin,debug,unsafedebug,eth,governance,klay,net,personal,txpool")
     namespaces = namespaces.split(",")
 
     if "admin" in namespaces:
