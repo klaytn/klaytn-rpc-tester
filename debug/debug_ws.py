@@ -75,18 +75,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
         method = f"{self.ns}_stopPProf"
         Utils.call_ws(self.endpoint, method, [], self.log_path)
 
-    def test_debug_isPProfRunning_success_wrong_value_param(self):
-
-        method = f"{self.ns}_isPProfRunning"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_isPProfRunning_success(self):
-
-        method = f"{self.ns}_isPProfRunning"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        self.assertIsNone(error)
-
     def test_debug_getModifiedAccountsByHash_error_no_param1(self):
 
         method = f"{self.ns}_getModifiedAccountsByHash"
@@ -216,94 +204,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
         start_block_number = block_number - 1
         end_block_number = block_number
 
-        method = f"{self.ns}_getModifiedAccountsByNumber"
-        params = [start_block_number, end_block_number]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_backtraceAt_success(self):
-
-        method = f"{self.ns}_backtraceAt"
-        params = ["agent.go:97"]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_backtraceAt_error_no_param(self):
-
-        method = f"{self.ns}_backtraceAt"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_backtraceAt_error_wrong_type_param(self):
-
-        method = f"{self.ns}_backtraceAt"
-        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_backtraceAt_error_wrong_value_param(self):
-
-        method = f"{self.ns}_backtraceAt"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        self.assertEqual(-32000, error.get("code"))
-        self.assertEqual("expect file.go:234", error.get("message"))
-
-    def test_debug_blockProfile_success(self):
-
-        method = f"{self.ns}_blockProfile"
-        params = ["block_created_by_ws.profile", 10]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_blockProfile_error_no_param(self):
-
-        method = f"{self.ns}_blockProfile"
-        _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_blockProfile_error_wrong_type_param1(self):
-
-        method = f"{self.ns}_blockProfile"
-        params = [10, 10]  # Invalid param at index 0
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_blockProfile_error_wrong_type_param2(self):
-
-        method = f"{self.ns}_blockProfile"
-        params = [
-            "block_created_by_ws.profile",
-            "wrongtype",
-        ]  # Invalid param at index 1
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg1StringToUint", error)
-
-    def test_debug_cpuProfile_error_no_param(self):
-
-        method = f"{self.ns}_cpuProfile"
-        _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_cpuProfile_error_wrong_type_param1(self):
-
-        method = f"{self.ns}_cpuProfile"
-        params = ["cpu_created_by_ws.profile", "wrongTypeParam1"]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg1StringToUint", error)
-
-    def test_debug_cpuProfile_error_wrong_type_param2(self):
-
-        method = f"{self.ns}_cpuProfile"
-        params = [10, 10]  # Invalid param at index 0
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_cpuProfile_success(self):
-
-        method = f"{self.ns}_cpuProfile"
-        params = ["cpu_created_by_ws.profile", 10]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
     def test_debug_dumpBlock_error_no_param(self):
 
         method = f"{self.ns}_dumpBlock"
@@ -331,18 +231,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
 
         method = f"{self.ns}_dumpBlock"
         _, error = Utils.call_ws(self.endpoint, method, [block_number], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_gcStats_success_wrong_value_param(self):
-
-        method = f"{self.ns}_gcStats"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_gcStats_success(self):
-
-        method = f"{self.ns}_gcStats"
-        _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)
         self.assertIsNone(error)
 
     def test_debug_getBlockRlp_error_no_param(self):
@@ -477,31 +365,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
         _, error = Utils.call_ws(self.endpoint, method, [block_hash], self.log_path)
         self.assertIsNone(error)
 
-    def test_debug_traceBlockFromFile_error_no_param(self):
-
-        method = f"{self.ns}_traceBlockFromFile"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_traceBlockFromFile_error_wrong_type_param(self):
-
-        method = f"{self.ns}_traceBlockFromFile"
-        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_traceBlockFromFile_error_wrong_value_param(self):
-
-        method = f"{self.ns}_traceBlockFromFile"
-        _, error = Utils.call_ws(self.endpoint, method, ["invalid_file"], self.log_path)
-        self.assertEqual(-32000, error.get("code"))
-        self.assertIn("could not read file", error.get("message"))
-
-    def test_debug_traceBlockFromFile_success(self):
-
-        method = f"{self.ns}_traceBlockFromFile"
-        _, error = Utils.call_ws(self.endpoint, method, [f"{PROJECT_ROOT_DIR}/block.rlp"], self.log_path)
-        self.assertIsNone(error)
-
     def test_debug_traceTransaction_error_no_param(self):
 
         method = f"{self.ns}_traceTransaction"
@@ -562,89 +425,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
         _, error = Utils.call_ws(self.endpoint, method, [transaction_hash], self.log_path)
         self.assertIsNone(error)
 
-    def test_debug_goTrace_error_no_param(self):
-
-        method = f"{self.ns}_goTrace"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_goTrace_error_wrong_type_param1(self):
-
-        method = f"{self.ns}_goTrace"
-        params = [3, 3]  # Invalid param at index 0
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_goTrace_error_wrong_type_param2(self):
-
-        method = f"{self.ns}_goTrace"
-        params = [
-            "go_created_by_ws.trace",
-            "wrongDuration",
-        ]  # Invalid param at index 1
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg1StringToUint", error)
-
-    def test_debug_goTrace_success(self):
-
-        method = f"{self.ns}_goTrace"
-        params = ["go_created_by_ws.trace", 3]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_memStats_success_wrong_value_param(self):
-
-        method = f"{self.ns}_memStats"
-        params = ["abcd"]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_memStats_success(self):
-
-        method = f"{self.ns}_memStats"
-        _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_metrics_error_no_param(self):
-
-        method = f"{self.ns}_metrics"
-        _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_metrics_error_wrong_type_param(self):
-
-        method = f"{self.ns}_metrics"
-        params = ["abcd"]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg0StringToBool", error)
-
-    def test_debug_metrics_success(self):
-
-        method = f"{self.ns}_metrics"
-        params = [True]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_printBlock_error_no_param(self):
-
-        method = f"{self.ns}_printBlock"
-        _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_printBlock_error_wrong_param(self):
-
-        method = f"{self.ns}_printBlock"
-        params = ["abcd"]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "arg0HexWithoutPrefix", error)
-
-    def test_debug_printBlock_success(self):
-
-        method = f"{self.ns}_printBlock"
-        params = [3]
-        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-
     def test_debug_preimage_success(self):
 
         # The data generate a contract executing sha3('1234') which will be used to test 'debug_preimage'
@@ -656,145 +436,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
         # The hash value of sha3('1234')
         sha3_hash = "0x387a8233c96e1fc0ad5e284353276177af2186e7afa85296f106336e376669f7"
         _, error = Utils.call_ws(self.endpoint, method, [sha3_hash], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_freeOSMemory_success_wrong_value_param(self):
-
-        method = f"{self.ns}_freeOSMemory"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_freeOSMemory_success(self):
-
-        method = f"{self.ns}_freeOSMemory"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_setHead_success(self):
-
-        method = f"{self.ns}_setHead"
-        _, error = Utils.call_ws(self.endpoint, method, ["0x325aa0"], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_setBlockProfileRate_error_no_param(self):
-
-        method = f"{self.ns}_setBlockProfileRate"
-        _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_setBlockProfileRate_error_wrong_type_param(self):
-
-        method = f"{self.ns}_setBlockProfileRate"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        Utils.check_error(self, "arg0StringToInt", error)
-
-    def test_debug_setBlockProfileRate_success(self):
-
-        method = f"{self.ns}_setBlockProfileRate"
-        _, error = Utils.call_ws(self.endpoint, method, [1], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_setVMLogTarget_success(self):
-
-        method = f"{self.ns}_setVMLogTarget"
-        _, error = Utils.call_ws(self.endpoint, method, [1], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_setVMLogTarget_error_no_param(self):
-
-        method = f"{self.ns}_setVMLogTarget"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_setVMLogTarget_error_wrong_type_param(self):
-
-        method = f"{self.ns}_setVMLogTarget"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        Utils.check_error(self, "arg0StringToInt", error)
-
-    def test_debug_setVMLogTarget_error_wrong_value_param(self):
-
-        method = f"{self.ns}_setVMLogTarget"
-        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
-        Utils.check_error(self, "TargetShouldBeBetween0And3", error)
-
-    def test_debug_writeBlockProfile_error_no_param(self):
-
-        method = f"{self.ns}_writeBlockProfile"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_writeBlockProfile_error_wrong_type_param(self):
-
-        method = f"{self.ns}_writeBlockProfile"
-        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_writeBlockProfile_success(self):
-
-        method = f"{self.ns}_writeBlockProfile"
-        profile_file = "block_rate_1_created_by_ws.profile"
-        _, error = Utils.call_ws(self.endpoint, method, [profile_file], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_stacks_success_no_param(self):
-
-        method = f"{self.ns}_stacks"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_stacks_success_wrong_value_param(self):
-
-        method = f"{self.ns}_stacks"
-        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_stacks_success(self):
-
-        method = f"{self.ns}_stacks"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_startCPUProfile_no_param(self):
-
-        method = f"{self.ns}_startCPUProfile"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_startCPUProfile_success(self):
-
-        method = f"{self.ns}_startCPUProfile"
-        profile_file = "start_cpu_30s_created_by_ws.profile"
-        _, error = Utils.call_ws(self.endpoint, method, [profile_file], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_startCPUProfile_error_already_in_progress(self):
-
-        method = f"{self.ns}_startCPUProfile"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        Utils.check_error(self, "CPUProfilingAlreadyInProgress", error)
-
-    def test_debug_stopCPUProfile_success_wrong_value_param(self):
-
-        method = f"{self.ns}_stopCPUProfile"
-        _, error = Utils.call_ws(self.endpoint, method, ["abd"], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_stopCPUProfile_error_not_in_progress(self):
-
-        method = f"{self.ns}_stopCPUProfile"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "CPUProfilingNotInProgress", error)
-
-    def test_debug_stopCPUProfile_success(self):
-
-        # To test TC successfully, start cpu profile.
-        method = f"{self.ns}_startCPUProfile"
-        profile_file = "start_cpu_30s_created_by_ws.profile"
-        Utils.call_rpc(self.endpoint, method, [profile_file], self.log_path)
-
-        method = f"{self.ns}_stopCPUProfile"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_debug_startGoTrace_error_no_param(self):
@@ -828,92 +469,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
         method = f"{self.ns}_stopGoTrace"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "TraceNotInProgress", error)
-
-    def test_debug_verbosity_error_no_param(self):
-
-        method = f"{self.ns}_verbosity"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_verbosity_error_wrong_type_param(self):
-
-        method = f"{self.ns}_verbosity"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        Utils.check_error(self, "arg0StringToInt", error)
-
-    def test_debug_verbosity_error_wrong_value_param(self):
-
-        method = f"{self.ns}_verbosity"
-        _, error = Utils.call_ws(self.endpoint, method, [100], self.log_path)
-        Utils.check_error(self, "LogLevelHigherThan6", error)
-
-    def test_debug_verbosity_success(self):
-
-        method = f"{self.ns}_verbosity"
-        _, error = Utils.call_ws(self.endpoint, method, [3], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_vmodule_error_no_param(self):
-
-        method = f"{self.ns}_vmodule"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_vmodule_error_wrong_type_param(self):
-
-        method = f"{self.ns}_vmodule"
-        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_vmodule_error_wrong_value_param(self):
-
-        method = f"{self.ns}_vmodule"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        Utils.check_error(self, "ExpectCommaSeparatedList", error)
-
-    def test_debug_vmodule_success(self):
-
-        method = f"{self.ns}_vmodule"
-        module = "p2p/*=5"
-        _, error = Utils.call_ws(self.endpoint, method, [module], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_writeMemProfile_error_no_param(self):
-
-        method = f"{self.ns}_writeMemProfile"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_writeMemProfile_error_wrong_type_param(self):
-
-        method = f"{self.ns}_writeMemProfile"
-        _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
-        Utils.check_error(self, "arg0NumberToString", error)
-
-    def test_debug_writeMemProfile_success(self):
-
-        method = f"{self.ns}_writeMemProfile"
-        profile_file = "mem_created_by_ws.profile"
-        _, error = Utils.call_ws(self.endpoint, method, [profile_file], self.log_path)
-        self.assertIsNone(error)
-
-    def test_debug_setGCPercent_error_no_param(self):
-
-        method = f"{self.ns}_setGCPercent"
-        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
-        Utils.check_error(self, "arg0NoParams", error)
-
-    def test_debug_setGCPercent_error_wrong_type_param(self):
-
-        method = f"{self.ns}_setGCPercent"
-        _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
-        Utils.check_error(self, "arg0StringToInt", error)
-
-    def test_debug_setGCPercent_success(self):
-
-        method = f"{self.ns}_setGCPercent"
-        _, error = Utils.call_ws(self.endpoint, method, [90], self.log_path)
-        self.assertIsNone(error)
 
     def test_debug_standardTraceBlockToFile_error_no_param(self):
 
@@ -959,15 +514,6 @@ class TestDebugNamespaceWS(unittest.TestCase):
     @staticmethod
     def suite():
         suite = unittest.TestSuite()
-        suite.addTest(TestDebugNamespaceWS("test_debug_startPProf_error_wrong_type_param1"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startPProf_error_wrong_type_param2"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startPProf_success_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startPProf_error_already_running"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stopPProf_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stopPProf_error_not_running"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startPProf_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_isPProfRunning_success_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_isPProfRunning_success"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getModifiedAccountsByHash_error_no_param1"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getModifiedAccountsByHash_error_wrong_type_param1"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getModifiedAccountsByHash_error_wrong_type_param2"))
@@ -980,24 +526,10 @@ class TestDebugNamespaceWS(unittest.TestCase):
         suite.addTest(TestDebugNamespaceWS("test_debug_getModifiedAccountsByNumber_error_wrong_value_param1"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getModifiedAccountsByNumber_error_wrong_value_param2"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getModifiedAccountsByNumber_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_backtraceAt_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_backtraceAt_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_backtraceAt_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_backtraceAt_error_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_blockProfile_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_blockProfile_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_blockProfile_error_wrong_type_param1"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_blockProfile_error_wrong_type_param2"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_cpuProfile_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_cpuProfile_error_wrong_type_param1"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_cpuProfile_error_wrong_type_param2"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_cpuProfile_success"))
         suite.addTest(TestDebugNamespaceWS("test_debug_dumpBlock_error_no_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_dumpBlock_error_wrong_type_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_dumpBlock_error_wrong_value_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_dumpBlock_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_gcStats_success_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_gcStats_success"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getBlockRlp_error_no_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getBlockRlp_error_wrong_type_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_getBlockRlp_error_wrong_value_param"))
@@ -1014,71 +546,14 @@ class TestDebugNamespaceWS(unittest.TestCase):
         suite.addTest(TestDebugNamespaceWS("test_debug_traceBlockByHash_error_wrong_type_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_traceBlockByHash_error_wrong_value_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_traceBlockByHash_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_traceBlockFromFile_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_traceBlockFromFile_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_traceBlockFromFile_error_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_traceBlockFromFile_success"))
         suite.addTest(TestDebugNamespaceWS("test_debug_traceTransaction_error_no_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_traceTransaction_error_wrong_type_param1"))
         suite.addTest(TestDebugNamespaceWS("test_debug_traceTransaction_error_wrong_value_param1"))
         suite.addTest(TestDebugNamespaceWS("test_debug_traceTransaction_error_wrong_value_param2"))
         suite.addTest(TestDebugNamespaceWS("test_debug_traceTransaction_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_goTrace_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_goTrace_error_wrong_type_param1"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_goTrace_error_wrong_type_param2"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_goTrace_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_memStats_success_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_memStats_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_metrics_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_metrics_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_metrics_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_printBlock_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_printBlock_error_wrong_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_printBlock_success"))
         """
         suite.addTest(TestDebugNamespaceWS("test_debug_preimage_success"))
         """
-        suite.addTest(TestDebugNamespaceWS("test_debug_freeOSMemory_success_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_freeOSMemory_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setHead_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setBlockProfileRate_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setBlockProfileRate_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setBlockProfileRate_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setVMLogTarget_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setVMLogTarget_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setVMLogTarget_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setVMLogTarget_error_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_writeBlockProfile_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_writeBlockProfile_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_writeBlockProfile_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stacks_success_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stacks_success_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stacks_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startCPUProfile_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startCPUProfile_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startCPUProfile_error_already_in_progress"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stopCPUProfile_success_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stopCPUProfile_error_not_in_progress"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stopCPUProfile_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startGoTrace_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startGoTrace_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_startGoTrace_error_already_in_progress"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stopGoTrace_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_stopGoTrace_error_not_in_progress"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_verbosity_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_verbosity_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_verbosity_error_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_verbosity_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_vmodule_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_vmodule_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_vmodule_error_wrong_value_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_vmodule_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_writeMemProfile_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_writeMemProfile_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_writeMemProfile_success"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setGCPercent_error_no_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setGCPercent_error_wrong_type_param"))
-        suite.addTest(TestDebugNamespaceWS("test_debug_setGCPercent_success"))
         suite.addTest(TestDebugNamespaceWS("test_debug_standardTraceBlockToFile_error_no_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_standardTraceBlockToFile_error_wrong_type_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_standardTraceBlockToFile_error_wrong_value_param"))
