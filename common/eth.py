@@ -30,20 +30,17 @@ def get_block_number(endpoint):
     block_number, _ = Utils.call_rpc(endpoint, method, ["latest", True], log_path)
     return block_number
 
-
-def checkBaseFeePerGasFieldAndValue(self, result, value=""):
+def checkBaseFeePerGasFieldAndValue(self, result, value = ""):
     self.assertIsNotNone(result)
     self.assertIsNotNone(result["baseFeePerGas"])
     if value != "":
         self.assertEqual(result["baseFeePerGas"], value)
-
 
 def checkGasPriceField(self, result):
     self.assertIsNotNone(result["gasPrice"])
     if result["type"] == "0x2":  # TxTypeEthereumDynamicFee
         self.assertIsNotNone(result["maxFeePerGas"])
         self.assertIsNotNone(result["maxPriorityFeePerGas"])
-
 
 def checkEthereumBlockOrHeaderFormat(self, actualReturn):
     expectedReturn = json.loads(
