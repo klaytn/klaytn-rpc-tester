@@ -375,7 +375,7 @@ class TestKlayNamespaceBlockRPC(unittest.TestCase):
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
         klay_common.checkBaseFeePerGasFieldAndValue(self, result, "0x0")
-        # self.assertEqual(result["baseFeePerGas"], "0x0")
+        #self.assertEqual(result["baseFeePerGas"], "0x0")
 
     def test_klay_getHeaderByHash_error_no_param(self):
 

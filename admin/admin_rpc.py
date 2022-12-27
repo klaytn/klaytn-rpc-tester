@@ -200,14 +200,14 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         host = "0.0.0.0"
         port = int(self.rpc_port)
         cors = "*"
-        apis = "admin,eth,klay,net,personal,debug,unsafedebug,web3,txpool"
+        apis = "admin,eth,klay,net,personal,debug,web3,txpool"
         return [host, port, cors, apis]
 
     def create_params_for_starting_ws(self):
         host = "0.0.0.0"
         port = int(self.ws_port)
         cors = "*"
-        apis = "admin,eth,klay,net,personal,debug,unsafedebug,web3,txpool"
+        apis = "admin,eth,klay,net,personal,debug,web3,txpool"
         return [host, port, cors, apis]
 
     def test_admin_startRPC_error_wrong_type_param1_using_ws(self):

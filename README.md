@@ -18,14 +18,14 @@ All done :)
 - [1] Faucet Account: An account which has enough amount KLAY for the test.
 ### For EN (to be tested)
 - Options 
-  1. --rpc --rpcapi admin,debug,unsafedebug,klay,eth,miner,net,personal,rpc,txpool,web3 --rpcport 8551 --rpcaddr 0.0.0.0
-  2. --ws --wsapi admin,debug,unsafedebug,klay,eth,miner,net,personal,rpc,txpool,web3 --wsport 8552 --wsaddr 0.0.0.0
+  1. --rpc --rpcapi admin,debug,klay,eth,miner,net,personal,rpc,txpool,web3 --rpcport 8551 --rpcaddr 0.0.0.0
+  2. --ws --wsapi admin,debug,klay,eth,miner,net,personal,rpc,txpool,web3 --wsport 8552 --wsaddr 0.0.0.0
   3. --sendertxhashindexing
   4. --vmdebug
   5. --txpool.allow-local-anchortx
 
 ```shell
---rpc --rpcapi admin,debug,unsafedebug,klay,eth,miner,net,personal,rpc,txpool,web3 --rpcport 8551 --rpcaddr 0.0.0.0 --ws --wsapi admin,debug,klay,miner,net,personal,rpc,txpool,web3 --wsport 8552 --wsaddr 0.0.0.0 --sendertxhashindexing --vmdebug
+--rpc --rpcapi admin,debug,klay,eth,miner,net,personal,rpc,txpool,web3 --rpcport 8551 --rpcaddr 0.0.0.0 --ws --wsapi admin,debug,klay,miner,net,personal,rpc,txpool,web3 --wsport 8552 --wsaddr 0.0.0.0 --sendertxhashindexing --vmdebug
 ```
 
 - File 
@@ -48,7 +48,7 @@ All done :)
     "feePayerPrivateKey": "752a08fd165dcc7f37f3e444cf485c5b2020e4096a2cfd02f823a8b8280baaab",
     "feePayerAddress": "0xf77e71cf745e14129a344bcfb7e28240a5351beb",
     "feePayerPassword": "2524",
-    "namespaces": "admin,debug,unsafedebug,personal,txpool,eth,klay"
+    "namespaces": "admin,debug,personal,txpool,eth,klay"
 }
 ```
 
@@ -156,10 +156,6 @@ If you want to run tests for specific protocol, you can do like below.
 ├── txpool # This contains test scripts about `net` namespace.
 │   ├── txpool_rpc.py
 │   └── txpool_ws.py
-├── unsafedebug # This contains test scripts about `unsafedebug` namespace.
-│   ├── block.rlp
-│   ├── unsafedebug_rpc.py
-│   └── unsafedebug_ws.py
 ├── utils.py # The Utils class which will be used by many test cases.
 ├── pre-commit # Place this script to .git/hooks/pre-commit when you maintain this project.
 └── venv # Virtual env
