@@ -17,14 +17,12 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
     waiting_count = 2
 
     def test_eth_sendTransaction_error_no_param1(self):
-
         method = f"{self.ns}_sendTransaction"
         params = None
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_sendTransaction_error_no_param2(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -38,7 +36,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "ContractCreationWithoutData", error)
 
     def test_eth_sendTransaction_error_no_param3(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -52,7 +49,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "ContractCreationWithoutData", error)
 
     def test_eth_sendTransaction_error_no_param4(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -66,7 +62,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "UnknownAccount", error)
 
     def test_eth_sendTransaction_success_no_param1(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -80,7 +75,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sendTransaction_success_no_param2(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -94,7 +88,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sendTransaction_success_no_param3(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -108,7 +101,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sendTransaction_success_no_param4(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -122,7 +114,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sendTransaction_success_no_param5(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -136,7 +127,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sendTransaction_error_wrong_type_param1(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -158,7 +148,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsFromAddress", error)
 
     def test_eth_sendTransaction_error_wrong_type_param2(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -180,7 +169,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsToAddress", error)
 
     def test_eth_sendTransaction_error_wrong_type_param3(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -202,7 +190,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsGasUint", error)
 
     def test_eth_sendTransaction_error_wrong_type_param4(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -224,7 +211,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsGaspriceBig", error)
 
     def test_eth_sendTransaction_error_wrong_type_param5(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -246,7 +232,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsValueBig", error)
 
     def test_eth_sendTransaction_error_wrong_value_param1(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -268,7 +253,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsFromAddress", error)
 
     def test_eth_sendTransaction_error_wrong_value_param2(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -290,7 +274,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsToAddress", error)
 
     def test_eth_sendTransaction_error_wrong_value_param3(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -312,7 +295,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "GasTooLow", error)
 
     def test_eth_sendTransaction_error_wrong_value_param4(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -334,7 +316,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "InvalidGasPrice", error)
 
     def test_eth_sendTransaction_error_wrong_value_param5(self):
-
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         txTo = test_data_set["account"]["sender"]["address"]
@@ -360,7 +341,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "InsufficientFunds", error)
 
     def test_eth_sendTransaction_success(self):
-
         method = f"{self.ns}_sendTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -382,14 +362,12 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_signTransaction_error_no_param1(self):
-
         method = f"{self.ns}_signTransaction"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_signTransaction_error_no_param2(self):
-
         method = f"{self.ns}_signTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -408,7 +386,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "GasNotSpecified", error)
 
     def test_eth_signTransaction_error_no_param3(self):
-
         method = f"{self.ns}_signTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -427,7 +404,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "GasNotSpecified", error)
 
     def test_eth_signTransaction_error_no_param4(self):
-
         method = f"{self.ns}_signTransaction"
         txFrom = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -441,7 +417,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "GasNotSpecified", error)
 
     def test_eth_signTransaction_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -470,7 +445,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsFromAddress", error)
 
     def test_eth_signTransaction_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -499,7 +473,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsToAddress", error)
 
     def test_eth_signTransaction_error_wrong_type_param3(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -528,7 +501,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsGasUint", error)
 
     def test_eth_signTransaction_error_wrong_type_param4(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -557,7 +529,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsGaspriceBig", error)
 
     def test_eth_signTransaction_error_wrong_type_param5(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -586,7 +557,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsValueBig", error)
 
     def test_eth_signTransaction_error_wrong_type_param6(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -615,7 +585,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsNonceUint", error)
 
     def test_eth_signTransaction_success(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -644,21 +613,18 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sendRawTransaction_error_no_param(self):
-
         method = f"{self.ns}_sendRawTransaction"
         params = []
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_sendRawTransaction_error_wrong_type_param(self):
-
         method = f"{self.ns}_sendRawTransaction"
         params = ["abcd"]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0HexToBytes", error)
 
     def test_eth_sendRawTransaction_success(self):
-
         Utils.waiting_count("Waiting for", 5, "seconds until writing a block")
 
         method = f"{self.ns}_getTransactionCount"
@@ -695,7 +661,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sendRawTransaction_AccessList_error_wrong_prefix(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -754,7 +719,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
             )
 
     def test_eth_sendRawTransaction_DynamicFee_error_wrong_prefix(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -814,7 +778,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
             )
 
     def test_eth_getTransactionByBlockHashAndIndex_error_no_param(self):
-
         method = f"{self.ns}_getTransactionByBlockHashAndIndex"
 
         params = []
@@ -822,7 +785,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getTransactionByBlockHashAndIndex_error_wrong_type_param(self):
-
         method = f"{self.ns}_getTransactionByBlockHashAndIndex"
 
         params = ["txhash", "0x0"]
@@ -830,7 +792,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToHash", error)
 
     def test_eth_getTransactionByBlockHashAndIndex_error_wrong_value_param(self):
-
         method = f"{self.ns}_getTransactionByBlockHashAndIndex"
 
         params = [
@@ -841,7 +802,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_eth_getTransactionByBlockHashAndIndex_success(self):
-
         method = f"{self.ns}_getTransactionByBlockHashAndIndex"
         txData = test_data_set["txData"]
         for tx in txData:
@@ -850,7 +810,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
             self.assertIsNone(error)
 
     def test_eth_getTransactionByBlockNumberAndIndex_error_no_param(self):
-
         method = f"{self.ns}_getTransactionByBlockNumberAndIndex"
 
         params = []
@@ -858,7 +817,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getTransactionByBlockNumberAndIndex_error_wrong_value_param(self):
-
         method = f"{self.ns}_getTransactionByBlockNumberAndIndex"
 
         params = ["0xffffffff", "0x0"]
@@ -868,7 +826,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getTransactionByBlockNumberAndIndex_success(self):
-
         method = f"{self.ns}_getTransactionByBlockNumberAndIndex"
 
         txData = test_data_set["txData"]
@@ -878,28 +835,24 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
             self.assertIsNone(error)
 
     def test_eth_getTransactionReceipt_error_no_param(self):
-
         method = f"{self.ns}_getTransactionReceipt"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getTransactionReceipt_error_wrong_type_param(self):
-
         method = f"{self.ns}_getTransactionReceipt"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0HexToHash", error)
 
     def test_eth_getTransactionReceipt_success_wrong_value_param(self):
-
         method = f"{self.ns}_getTransactionReceipt"
         params = ["0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_getTransactionReceipt_success(self):
-
         method = f"{self.ns}_getTransactionReceipt"
         txData = test_data_set["txData"]
         for tx in txData:
@@ -909,14 +862,12 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
             self.assertIsNotNone(result["effectiveGasPrice"])
 
     def test_eth_call_error_no_param1(self):
-
         method = f"{self.ns}_call"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_call_error_no_param2(self):
-
         method = f"{self.ns}_call"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         params = [{"to": contract}, "latest"]
@@ -924,7 +875,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "ExecutionReverted", error)
 
     def test_eth_call_error_no_param3(self):
-
         method = f"{self.ns}_call"
         methodName = "eth_call"
         address = test_data_set["account"]["sender"]["address"]
@@ -938,7 +888,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "VMErrorOccurs", error)
 
     def test_eth_call_error_wrong_type_param1(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -961,7 +910,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsFromAddress", error)
 
     def test_eth_call_error_wrong_type_param2(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -984,7 +932,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsToAddress", error)
 
     def test_eth_call_error_wrong_type_param3(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1007,7 +954,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsGasUint", error)
 
     def test_eth_call_error_wrong_type_param4(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1030,7 +976,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsGaspriceBig", error)
 
     def test_eth_call_error_wrong_type_param5(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1053,7 +998,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsValueBig", error)
 
     def test_eth_call_error_wrong_type_param6(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1076,7 +1020,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToEthTransactionArgsDataBytes", error)
 
     def test_eth_call_error_wrong_type_param7(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1099,7 +1042,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg1HexWithoutPrefix", error)
 
     def test_eth_call_error_wrong_value_param1(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1122,7 +1064,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "ExecutionReverted", error)
 
     def test_eth_call_error_evm_revert_message(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         ownerContract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1136,7 +1077,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "ExecutionReverted", error)
 
     def test_eth_call_error_insufficient_balance_feepayer(self):
-
         method = f"{self.ns}_call"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         zeroBalanceAddr = "0x15318f21f3dee6b2c64d2a633cb8c1194877c882"
@@ -1156,7 +1096,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "InsufficientBalanceFeePayer", error)
 
     def test_eth_call_error_intrinsic_gas(self):
-
         method = f"{self.ns}_call"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         zeroBalanceAddr = "0x15318f21f3dee6b2c64d2a633cb8c1194877c882"
@@ -1176,7 +1115,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "GasTooLow", error)
 
     def test_eth_call_success1(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1188,7 +1126,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_call_success2(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1200,7 +1137,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_call_success3(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1221,7 +1157,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_call_success4(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1244,7 +1179,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_call_success_state_override_balance_and_code(self):
-
         method = f"{self.ns}_call"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1269,7 +1203,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_estimateGas_error_no_param(self):
-
         method = f"{self.ns}_estimateGas"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1282,7 +1215,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_estimateGas_error_wrong_type_param1(self):
-
         method = f"{self.ns}_estimateGas"
         address = test_data_set["account"]["sender"]["address"]
         contract = "abcd"
@@ -1295,7 +1227,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToEthTransactionArgsToAddressWithoutPrefix", error)
 
     def test_eth_estimateGas_error_wrong_type_param2(self):
-
         method = f"{self.ns}_estimateGas"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1308,7 +1239,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "arg0StringToEthTransactionArgsDataBytes", error)
 
     def test_eth_estimateGas_error_exceeds_allowance(self):
-
         method = f"{self.ns}_estimateGas"
         zeroBalanceAddr = "0x15318f21f3dee6b2c64d2a633cb8c1194877c882"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1330,7 +1260,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "GasRequiredExceedsAllowance", error)
 
     def test_eth_estimateGas_error_evm_revert_message(self):
-
         method = f"{self.ns}_estimateGas"
         ownerContract = test_data_set["contracts"]["unknown"]["address"][0]
         notOwner = "0x15318f21f3dee6b2c64d2a633cb8c1194877c882"
@@ -1343,7 +1272,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "ExecutionReverted", error)
 
     def test_eth_estimateGas_error_revert(self):
-
         method = f"{self.ns}_estimateGas"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         params = [{"to": contract}, "latest"]
@@ -1351,7 +1279,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         Utils.check_error(self, "ExecutionReverted", error)
 
     def test_eth_estimateGas_success(self):
-
         method = f"{self.ns}_estimateGas"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1364,7 +1291,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_estimateComputationCost_success(self):
-
         method = f"{self.ns}_estimateComputationCost"
         address = test_data_set["account"]["sender"]["address"]
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1387,28 +1313,24 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getTransactionByHash_error_no_param(self):
-
         method = f"{self.ns}_getTransactionByHash"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getTransactionByHash_error_wrong_type_param(self):
-
         method = f"{self.ns}_getTransactionByHash"
         params = [1234]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NonstringToHash", error)
 
     def test_eth_getTransactionByHash_success_wrong_value_param(self):
-
         method = f"{self.ns}_getTransactionByHash"
         params = ["0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_getTransactionByHash_success(self):
-
         method = f"{self.ns}_getTransactionByHash"
         txData = test_data_set["txData"]
         for tx in txData:
@@ -1419,14 +1341,12 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
             eth_common.checkGasPriceField(self, result)
 
     def test_eth_fillTransaction_error_no_param(self):
-
         method = f"{self.ns}_fillTransaction"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_fillTransaction_success(self):
-
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
         txFrom = test_data_set["account"]["sender"]["address"]
@@ -1455,7 +1375,6 @@ class TestEthNamespaceTransactionRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_pendingTransactions_success(self):
-
         method = f"{self.ns}_pendingTransactions"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)

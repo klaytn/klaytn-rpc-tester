@@ -16,13 +16,11 @@ class TestEthNamespaceGasWS(unittest.TestCase):
     waiting_count = 2
 
     def test_eth_maxPriorityFeePerGas_success(self):
-
         method = f"{self.ns}_maxPriorityFeePerGas"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_feeHistory_success(self):
-
         method = f"{self.ns}_feeHistory"
         blockCount = 3
         lastBlock = "latest"

@@ -16,21 +16,18 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
     waiting_count = 2
 
     def test_eth_newFilter_error_no_param(self):
-
         method = f"{self.ns}_newFilter"
         params = []
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_newFilter_error_wrong_type_param(self):
-
         method = f"{self.ns}_newFilter"
         params = [{"fromBlock": "1234"}]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_eth_newFilter_success(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -38,35 +35,30 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_newBlockFilter_success_wrong_value_param(self):
-
         method = f"{self.ns}_newBlockFilter"
         params = ["abcd"]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_newBlockFilter_success(self):
-
         method = f"{self.ns}_newBlockFilter"
         params = []
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_newPendingTransactionFilter_success_wrong_value_param(self):
-
         method = f"{self.ns}_newPendingTransactionFilter"
         params = ["abcd"]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_newPendingTransactionFilter_success(self):
-
         method = f"{self.ns}_newPendingTransactionFilter"
         params = []
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_uninstallFilter_error_no_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -85,7 +77,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_uninstallFilter_error_wrong_type_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -104,7 +95,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_uninstallFilter_success_false(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -124,7 +114,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_uninstallFilter_success(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -139,7 +128,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterChanges_error_no_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -159,7 +147,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterChanges_error_wrong_type_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -179,7 +166,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterChanges_error_wrong_value_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -199,7 +185,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterChanges_success(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -219,7 +204,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterLogs_error_no_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -239,7 +223,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterLogs_error_wrong_type_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -259,7 +242,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterLogs_error_wrong_value_param(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -279,7 +261,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getFilterLogs_success(self):
-
         method = f"{self.ns}_newFilter"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -299,28 +280,24 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getLogs_error_no_param(self):
-
         method = f"{self.ns}_getLogs"
         params = []
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getLogs_error_wrong_type_param(self):
-
         method = f"{self.ns}_getLogs"
         params = [{"fromBlock": "fromBlock"}]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_eth_getLogs_success_wrong_value_param(self):
-
         method = f"{self.ns}_getLogs"
         params = [{"fromBlock": "0xffffffff"}]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_getLogs_success(self):
-
         method = f"{self.ns}_getLogs"
         fromBlock = "latest"
         params = [{"fromBlock": fromBlock}]
@@ -328,7 +305,6 @@ class TestEthNamespaceFilterWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_subscribe_success(self):
-
         method = f"{self.ns}_subscribe"
         fromBlock = "latest"
         params = ["newHeads"]

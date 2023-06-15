@@ -16,7 +16,6 @@ class TestKlayNamespaceMiscellaneousWS(unittest.TestCase):
     waiting_count = 2
 
     def test_klay_sha3_error_no_param(self):
-
         method = f"{self.ns}_sha3"
         data = Utils.convert_to_hex("Hi Utils!")
         params = None
@@ -24,7 +23,6 @@ class TestKlayNamespaceMiscellaneousWS(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_klay_sha3_error_wrong_type_param(self):
-
         method = f"{self.ns}_sha3"
         data = Utils.convert_to_hex("Hi Utils!")
         params = ["data"]
@@ -32,7 +30,6 @@ class TestKlayNamespaceMiscellaneousWS(unittest.TestCase):
         Utils.check_error(self, "arg0HexToBytes", error)
 
     def test_klay_sha3_success(self):
-
         method = f"{self.ns}_sha3"
         data = Utils.convert_to_hex("Hi Utils!")
         params = [data]

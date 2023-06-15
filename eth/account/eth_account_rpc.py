@@ -17,7 +17,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
     waiting_count = 2
 
     def test_eth_accounts_success_wrong_value_param(self):
-
         block_number = eth_common.get_block_number(self.endpoint)
         self.assertIsNotNone(block_number)
 
@@ -26,7 +25,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_accounts_success(self):
-
         block_number = eth_common.get_block_number(self.endpoint)
         self.assertIsNotNone(block_number)
 
@@ -35,7 +33,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getBalance_error_no_param(self):
-
         method = f"{self.ns}_getBalance"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -44,7 +41,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getBalance_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getBalance"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -53,7 +49,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_eth_getBalance_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getBalance"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -62,7 +57,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg1HexWithoutPrefix", error)
 
     def test_eth_getBalance_error_wrong_value_param(self):
-
         method = f"{self.ns}_getBalance"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -71,7 +65,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "HeaderNotExist", error)
 
     def test_eth_getBalance_success(self):
-
         method = f"{self.ns}_getBalance"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -80,7 +73,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getTransactionCount_error_no_param(self):
-
         method = f"{self.ns}_getTransactionCount"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -89,7 +81,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getTransactionCount_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getTransactionCount"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -98,7 +89,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_eth_getTransactionCount_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getTransactionCount"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -107,7 +97,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg1HexWithoutPrefix", error)
 
     def test_eth_getTransactionCount_error_wrong_value_param(self):
-
         method = f"{self.ns}_getTransactionCount"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -116,7 +105,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "HeaderNotExist", error)
 
     def test_eth_getTransactionCount_success(self):
-
         method = f"{self.ns}_getTransactionCount"
         address = test_data_set["account"]["sender"]["address"]
         tag = "latest"
@@ -125,13 +113,11 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getCode_error_no_param(self):
-
         method = f"{self.ns}_getCode"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getCode_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getCode"
         tag = "latest"
         params = ["contractAddress", tag]
@@ -139,7 +125,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_eth_getCode_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getCode"
         tag = "latest"
         contractAddress = test_data_set["contracts"]["unknown"]["address"][0]
@@ -148,7 +133,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg1HexWithoutPrefix", error)
 
     def test_eth_getCode_error_wrong_value_param(self):
-
         method = f"{self.ns}_getCode"
         tag = "latest"
         contractAddress = test_data_set["contracts"]["unknown"]["address"][0]
@@ -157,7 +141,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_eth_getCode_success(self):
-
         block_number = eth_common.get_block_number(self.endpoint)
         self.assertIsNotNone(block_number)
 
@@ -169,13 +152,11 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getCode_error_no_param(self):
-
         method = f"{self.ns}_getCode"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getCode_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getCode"
         tag = "latest"
         params = ["contractAddress", tag]
@@ -183,7 +164,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_eth_getCode_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getCode"
         tag = "latest"
         contractAddress = test_data_set["contracts"]["unknown"]["address"][0]
@@ -192,7 +172,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg1HexWithoutPrefix", error)
 
     def test_eth_getCode_error_wrong_value_param(self):
-
         method = f"{self.ns}_getCode"
         tag = "latest"
         contractAddress = test_data_set["contracts"]["unknown"]["address"][0]
@@ -201,7 +180,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "HeaderNotExist", error)
 
     def test_eth_getCode_success(self):
-
         block_number = eth_common.get_block_number(self.endpoint)
         self.assertIsNotNone(block_number)
 
@@ -213,13 +191,11 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_sign_error_no_param(self):
-
         method = f"{self.ns}_sign"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_sign_error_wrong_type_param1(self):
-
         method = f"{self.ns}_sign"
         message = Utils.convert_to_hex("Hi Utils!")
         params = ["address", message]
@@ -227,7 +203,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_eth_sign_error_wrong_type_param2(self):
-
         method = f"{self.ns}_sign"
         message = Utils.convert_to_hex("Hi Utils!")
         address = test_data_set["account"]["sender"]["address"]
@@ -236,7 +211,6 @@ class TestEthNamespaceAccountRPC(unittest.TestCase):
         Utils.check_error(self, "arg1HexToBytes", error)
 
     def test_eth_sign_success(self):
-
         block_number = eth_common.get_block_number(self.endpoint)
         self.assertIsNotNone(block_number)
 

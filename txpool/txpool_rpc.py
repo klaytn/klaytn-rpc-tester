@@ -38,39 +38,33 @@ class TestTxpoolNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_txpool_content_success_wrong_value_param(self):
-
         self.send_some_txs()
         method = f"{self.ns}_content"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_txpool_content_success(self):
-
         self.send_some_txs()
         method = f"{self.ns}_content"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_txpool_inspect_success_wrong_value_param(self):
-
         method = f"{self.ns}_inspect"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_txpool_inspect_success(self):
-
         method = f"{self.ns}_inspect"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_txpool_status_success_wrong_value(self):
-
         method = f"{self.ns}_status"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_txpool_status_success(self):
-
         method = f"{self.ns}_status"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)

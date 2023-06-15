@@ -19,27 +19,23 @@ class TestAdminNamespaceRPC(unittest.TestCase):
     current_dt = None
 
     def test_admin_addPeer_error_no_param(self):
-
         method = f"{self.ns}_addPeer"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_admin_addPeer_error_wrong_type_param(self):
-
         method = f"{self.ns}_addPeer"
         params = [1234]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NumberToString", error)
 
     def test_admin_addPeer_error_wrong_value_param(self):
-
         method = f"{self.ns}_addPeer"
         params = ["1234"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "invalidNodeId", error)
 
     def test_admin_addPeer_success(self):
-
         method = f"{self.ns}_addPeer"
         kni = test_data_set["test"]["knis"][0]
         params = [kni]
@@ -58,7 +54,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         return peer_count, peers
 
     def test_admin_addPeer_stopped_node_success(self):
-
         peer_count, peers = self.fetch_peer_count_and_peers()
 
         # Try to add stopped or non-operating node
@@ -73,7 +68,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         self.assertEqual(peers, new_peers)
 
     def test_admin_addPeer_invalid_node_success(self):
-
         peer_count, peers = self.fetch_peer_count_and_peers()
         # Try to add invalid kni
         params = [test_data_set["test"]["knis"][2]]
@@ -87,7 +81,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         self.assertEqual(peers, new_peers)
 
     def test_admin_removePeer_success(self):
-
         method = f"{self.ns}_removePeer"
         params = [
             "kni://a979fb575495b8d6db44f750317d0f4622bf4c2aa3365d6af7c284339968eef29b69ad0dce72a4d8db5ebb4968de0e3bec910127f134779fbcb0cb6d3331163c@10.0.0.1:32323"
@@ -96,66 +89,56 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_admin_removePeer_error_no_param(self):
-
         method = f"{self.ns}_removePeer"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_admin_removePeer_error_wrong_type_param(self):
-
         method = f"{self.ns}_removePeer"
         params = [1234]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NumberToString", error)
 
     def test_admin_removePeer_error_wrong_value_param(self):
-
         method = f"{self.ns}_removePeer"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "invalidNodeId", error)
 
     def test_admin_peers_success(self):
-
         method = f"{self.ns}_peers"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_admin_peers_success_wrong_value_param(self):
-
         method = f"{self.ns}_peers"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_admin_datadir_success(self):
-
         method = f"{self.ns}_datadir"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_admin_datadir_success_wrong_value_param(self):
-
         method = f"{self.ns}_datadir"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_admin_nodeInfo_success_wrong_value_param(self):
-
         method = f"{self.ns}_nodeInfo"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_admin_nodeInfo_success(self):
-
         method = f"{self.ns}_nodeInfo"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_admin_stopRPC_success_using_ws(self):
-
         method = f"{self.ns}_stopRPC"
         ws_result, error = Utils.call_ws(self.endpoint, method, None, self.log_path)  # Using WebSocket is intended.
         self.assertTrue(ws_result)
@@ -164,7 +147,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
 
     def test_admin_stopRPC_error_http_rpc_not_running_using_ws(self):
-
         method = f"{self.ns}_stopRPC"
         _, error = Utils.call_ws(self.endpoint, method, None, self.log_path)  # Using WebSocket is intended.
         Utils.check_error(self, "HTTPRPCNotRunning", error)
@@ -172,7 +154,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
 
     def test_admin_startRPC_success_using_ws(self):
-
         # During running above tests, http endpoint is closed so we must request using WebSocket.
         method = f"{self.ns}_startRPC"
         ws_result, error = Utils.call_ws(self.endpoint, method, self.create_params_for_starting_rpc(), self.log_path)
@@ -180,7 +161,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_admin_stopRPC_success_wrong_value_param_using_ws(self):
-
         method = f"{self.ns}_stopRPC"
         params = ["abcd"]
         ws_result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
@@ -190,7 +170,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
 
     def test_admin_startRPC_success_no_param_using_ws(self):
-
         method = f"{self.ns}_startRPC"
         ws_result, error = Utils.call_ws(self.endpoint, method, None, self.log_path)  # Using WebSocket is intended.
         self.assertTrue(ws_result)
@@ -211,7 +190,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         return [host, port, cors, apis]
 
     def test_admin_startRPC_error_wrong_type_param1_using_ws(self):
-
         method = f"{self.ns}_startRPC"
         params = self.create_params_for_starting_rpc()
         params[0] = 1234  # Invalid host
@@ -219,7 +197,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NumberToString", error)
 
     def test_admin_startRPC_error_wrong_type_param2_using_ws(self):
-
         method = f"{self.ns}_startRPC"
         params = self.create_params_for_starting_rpc()
         params[1] = "portString"  # Invalid port
@@ -227,7 +204,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "arg1StringToInt", error)
 
     def test_admin_startRPC_error_wrong_type_param3_using_ws(self):
-
         method = f"{self.ns}_startRPC"
         params = self.create_params_for_starting_rpc()
         params[2] = 1234  # Invalid cors
@@ -235,7 +211,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "arg2NumberToString", error)
 
     def test_admin_startRPC_error_wrong_type_param4_using_ws(self):
-
         method = f"{self.ns}_startRPC"
         params = self.create_params_for_starting_rpc()
         params[3] = 1234  # Invalid apis
@@ -243,7 +218,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "arg3NumberToString", error)
 
     def test_admin_startRPC_error_wrong_value_param1_using_ws(self):
-
         # Before testing this TC, stop rpc first.
         # If not, HTTP RPC already running on 0.0.0.0:8551 will be returned as error.
         method = f"{self.ns}_stopRPC"
@@ -257,7 +231,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "NameResolutionFailure", error)
 
     def test_admin_startRPC_error_already_running_using_ws(self):
-
         method = f"{self.ns}_startRPC"
         params = self.create_params_for_starting_rpc()
         Utils.call_ws(self.endpoint, method, params, self.log_path)  # Using WebSocket is intended.
@@ -267,7 +240,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "HTTPAlreadyRunning", error)
 
     def test_admin_stopWS_success_using_rpc(self):
-
         method = f"{self.ns}_stopWS"
         result_from_rpc, error = Utils.call_rpc(self.endpoint, method, None, self.log_path)
         self.assertTrue(result_from_rpc)
@@ -276,7 +248,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
 
     def test_admin_startWS_success_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         result_from_rpc, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
@@ -284,7 +255,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_admin_stopWS_success_wrong_value_param_using_rpc(self):
-
         method = f"{self.ns}_stopWS"
         params = ["abcd"]
         result_from_rpc, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
@@ -294,14 +264,12 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
 
     def test_admin_stopWS_error_ws_not_running_using_rpc(self):
-
         method = f"{self.ns}_stopWS"
         result_from_rpc, error = Utils.call_rpc(self.endpoint, method, None, self.log_path)
         self.assertIsNone(result_from_rpc)
         Utils.check_error(self, "WSRPCNotRunning", error)
 
     def test_admin_startWS_error_wrong_type_param1_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         params[0] = "abcd"  # Invalid host
@@ -310,7 +278,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "NameResolutionFailure", error)
 
     def test_admin_startWS_error_wrong_type_param2_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         params[1] = "wsPort"  # Invalid port
@@ -319,7 +286,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "arg1StringToInt", error)
 
     def test_admin_startWS_error_wrong_type_param3_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         params[2] = 1234  # Invalid cors
@@ -328,7 +294,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "arg2NumberToString", error)
 
     def test_admin_startWS_error_wrong_type_param4_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         params[3] = 1234  # Invalid apis
@@ -337,7 +302,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "arg3NumberToString", error)
 
     def test_admin_startWS_error_wrong_value_param1_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         params[0] = "abcd"  # Invalid host
@@ -346,7 +310,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "NameResolutionFailure", error)
 
     def test_admin_startWS_success_no_param_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         result_from_rpc, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
@@ -354,7 +317,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_admin_startWS_error_already_running_using_rpc(self):
-
         method = f"{self.ns}_startWS"
         params = self.create_params_for_starting_ws()
         result_from_rpc, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
@@ -362,7 +324,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.check_error(self, "WSAlreadyRunning", error)
 
     def test_admin_exportChain_success(self):
-
         method = f"{self.ns}_exportChain"
         TestAdminNamespaceRPC.current_dt = datetime.fromtimestamp(time()).strftime("%Y%m%d%H%M%S")
         file_path = f"/tmp/chain_{TestAdminNamespaceRPC.current_dt}_created_by_rpc.txt"
@@ -374,7 +335,6 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         self.assertTrue(pathlib.Path.exists(pathlib.Path(file_path)))
 
     def test_admin_exportChain_error_already_exist(self):
-
         method = f"{self.ns}_exportChain"
         file_path = f"/tmp/chain_{TestAdminNamespaceRPC.current_dt}_created_by_rpc.txt"
         _, error = Utils.call_rpc(self.endpoint, method, [file_path], self.log_path)
@@ -383,13 +343,11 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
 
     def test_admin_exportChain_error_no_param(self):
-
         method = f"{self.ns}_exportChain"
         _, error = Utils.call_rpc(self.endpoint, method, [""], self.log_path)
         Utils.check_error(self, "NoSuchFile", error)
 
     def test_admin_importChain_success(self):
-
         method = f"{self.ns}_importChain"
         file_path = f"/tmp/chain_{self.current_dt}_created_by_rpc.txt"
         _, error = Utils.call_rpc(self.endpoint, method, [file_path], self.log_path)
@@ -398,19 +356,16 @@ class TestAdminNamespaceRPC(unittest.TestCase):
         Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
 
     def test_admin_importChain_error_no_param(self):
-
         method = f"{self.ns}_importChain"
         _, error = Utils.call_rpc(self.endpoint, method, [""], self.log_path)
         Utils.check_error(self, "NoSuchFile", error)
 
     def test_admin_importChain_error_wrong_type_param(self):
-
         method = f"{self.ns}_importChain"
         _, error = Utils.call_rpc(self.endpoint, method, [1234], self.log_path)
         Utils.check_error(self, "arg0NumberToString", error)
 
     def test_admin_importChain_error_wrong_value_param(self):
-
         method = f"{self.ns}_importChain"
         _, error = Utils.call_rpc(self.endpoint, method, ["/tmp/noexists.txt"], self.log_path)
         Utils.check_error(self, "NoSuchFile", error)
