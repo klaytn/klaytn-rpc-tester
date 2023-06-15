@@ -27,15 +27,6 @@ class TestKlayNamespaceConfigurationRPC(unittest.TestCase):
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
-    def test_klay_gasPriceAt_success(self):
-
-        block_number = klay_common.get_block_number(self.endpoint)
-        self.assertIsNotNone(block_number)
-
-        method = f"{self.ns}_gasPriceAt"
-        _, error = Utils.call_rpc(self.endpoint, method, [block_number], self.log_path)
-        self.assertIsNone(error)
-
     def test_klay_gasPrice_success_wrong_value_param(self):
 
         method = f"{self.ns}_gasPrice"
@@ -47,39 +38,6 @@ class TestKlayNamespaceConfigurationRPC(unittest.TestCase):
         method = f"{self.ns}_gasPrice"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
-
-    def test_klay_gasPriceAt_error_wrong_type_param(self):
-
-        method = f"{self.ns}_gasPriceAt"
-        _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
-        Utils.check_error(self, "arg0HexWithoutPrefix", error)
-
-    def test_klay_gasPriceAt_error_wrong_value_param(self):
-
-        method = f"{self.ns}_gasPriceAt"
-        _, error = Utils.call_rpc(self.endpoint, method, ["0xffffffff"], self.log_path)
-        Utils.check_error(self, "UnknownBlock", error)
-
-    def test_klay_gasPriceAt_success_no_param(self):
-
-        method = f"{self.ns}_gasPriceAt"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
-        self.assertIsNone(error)
-
-    def test_klay_gasPriceAt_success(self):
-
-        block_number = klay_common.get_block_number(self.endpoint)
-        self.assertIsNotNone(block_number)
-
-        method = f"{self.ns}_gasPriceAt"
-        result, error = Utils.call_rpc(self.endpoint, method, [block_number], self.log_path)
-        self.assertIsNone(error)
-
-        method = f"{self.ns}_getBlockByNumber"
-        params = [block_number, False]
-        b, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        self.assertIsNone(error)
-        self.assertEqual(b["baseFeePerGas"], result)
 
     def test_klay_isParallelDBWrite_success_wrong_value_param(self):
 
@@ -151,12 +109,9 @@ class TestKlayNamespaceConfigurationRPC(unittest.TestCase):
 
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_protocolVersion_success_wrong_value_param"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_protocolVersion_success"))
-        suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_success"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPrice_success_wrong_value_param"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPrice_success"))
-        suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_error_wrong_type_param"))
-        suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_error_wrong_value_param"))
-        suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_gasPriceAt_success_no_param"))
+
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_isParallelDBWrite_success_wrong_value_param"))
         suite.addTest(TestKlayNamespaceConfigurationRPC("test_klay_isParallelDBWrite_success"))
         suite.addTest(
