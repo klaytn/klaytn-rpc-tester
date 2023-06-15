@@ -15,38 +15,32 @@ class TestEthNamespaceConfigurationRPC(unittest.TestCase):
     waiting_count = 2
 
     def test_eth_coinbase_success(self):
-
         method = f"{self.ns}_coinbase"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_etherbase_success(self):
-
         method = f"{self.ns}_etherbase"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_gasPrice_success_wrong_value_param(self):
-
         method = f"{self.ns}_gasPrice"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_gasPrice_success(self):
-
         method = f"{self.ns}_gasPrice"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_chainId_success(self):
-
         method = f"{self.ns}_chainId"
         params = None
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_chainId_success_wrong_value_param(self):
-
         method = f"{self.ns}_chainId"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)

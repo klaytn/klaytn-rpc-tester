@@ -16,39 +16,33 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
     waiting_count = 2
 
     def test_eth_syncing_success_wrong_value_param(self):
-
         method = f"{self.ns}_syncing"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_syncing_success(self):
-
         method = f"{self.ns}_syncing"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_mining_success(self):
-
         method = f"{self.ns}_mining"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_eth_blockNumber_success(self):
-
         method = f"{self.ns}_blockNumber"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_blockNumber_success_wrong_value_param(self):
-
         method = f"{self.ns}_blockNumber"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_eth_getStorageAt_error_no_param(self):
-
         method = f"{self.ns}_getStorageAt"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         position = "0x0"
@@ -58,7 +52,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getStorageAt_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getStorageAt"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         position = "0x0"
@@ -68,7 +61,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_eth_getStorageAt_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getStorageAt"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         position = "0x0"
@@ -78,7 +70,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "HeaderNotExist", error)
 
     def test_eth_getStorageAt_success_wrong_value_param(self):
-
         method = f"{self.ns}_getStorageAt"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         position = "0x0"
@@ -88,7 +79,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getStorageAt_success(self):
-
         method = f"{self.ns}_getStorageAt"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
         position = "0x0"
@@ -98,7 +88,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getBlockTransactionCountByHash_error_no_param(self):
-
         txFrom = test_data_set["account"]["sender"]["address"]
         txTo = test_data_set["account"]["receiver"]["address"]
         txGas = hex(30400)
@@ -129,7 +118,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getBlockTransactionCountByHash_error_wrong_type_param(self):
-
         txFrom = test_data_set["account"]["sender"]["address"]
         txTo = test_data_set["account"]["receiver"]["address"]
         txGas = hex(30400)
@@ -160,7 +148,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToHash", error)
 
     def test_eth_getBlockTransactionCountByHash_error_wrong_value_param(self):
-
         txFrom = test_data_set["account"]["sender"]["address"]
         txTo = test_data_set["account"]["receiver"]["address"]
         txGas = hex(30400)
@@ -191,7 +178,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_eth_getBlockTransactionCountByHash_success(self):
-
         txFrom = test_data_set["account"]["sender"]["address"]
         txTo = test_data_set["account"]["receiver"]["address"]
         txGas = hex(30400)
@@ -222,28 +208,24 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getBlockTransactionCountByNumber_error_no_param(self):
-
         method = f"{self.ns}_getBlockTransactionCountByNumber"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getBlockTransactionCountByNumber_error_wrong_type_param(self):
-
         method = f"{self.ns}_getBlockTransactionCountByNumber"
         params = ["blocknumber"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_eth_getBlockTransactionCountByNumber_error_wrong_value_param(self):
-
         method = f"{self.ns}_getBlockTransactionCountByNumber"
         params = ["0xffffffff"]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(result)
 
     def test_eth_getBlockTransactionCountByNumber_success(self):
-
         blockNumber = eth_common.get_block_number(self.endpoint)
         method = f"{self.ns}_getBlockTransactionCountByNumber"
         params = [blockNumber]
@@ -251,21 +233,18 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getBlockByHash_error_no_param(self):
-
         method = f"{self.ns}_getBlockByHash"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getBlockByHash_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getBlockByHash"
         params = [True, True]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NonstringToHash", error)
 
     def test_eth_getBlockByHash_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = [num, True]
@@ -279,7 +258,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg1StringToBool", error)
 
     def test_eth_getBlockByHash_error_wrong_value_param(self):
-
         method = f"{self.ns}_getBlockByHash"
         params = [
             "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
@@ -291,7 +269,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getBlockByHash_success(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = [num, True]
@@ -308,7 +285,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         eth_common.checkEthereumBlockOrHeaderFormat(self, result)
 
     def test_eth_getBlockByNumber_error_no_param(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = []
@@ -316,7 +292,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getBlockByNumber_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = [True, True]
@@ -324,7 +299,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_eth_getBlockByNumber_error_wrong_type_param2(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = [num, "True"]
@@ -332,7 +306,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg1StringToBool", error)
 
     def test_eth_getBlockByNumber_error_wrong_value_param1(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = ["num", True]
@@ -340,7 +313,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_eth_getBlockByNumber_error_wrong_value_param2(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = ["0xffffffff", True]
@@ -350,7 +322,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getBlockByNumber_success(self):
-
         method = f"{self.ns}_getBlockByNumber"
         num = "latest"
         params = [num, True]
@@ -359,7 +330,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         eth_common.checkEthereumBlockOrHeaderFormat(self, result)
 
     def test_eth_getHeaderByHash_error_no_param(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = [num]
@@ -373,7 +343,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getHeaderByHash_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = [num]
@@ -387,7 +356,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToHash", error)
 
     def test_eth_getHeaderByHash_error_wrong_value_param(self):
-
         method = f"{self.ns}_getHeaderByHash"
         params = ["0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
@@ -396,7 +364,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getHeaderByHash_success(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = [num]
@@ -411,7 +378,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         eth_common.checkEthereumBlockOrHeaderFormat(self, result)
 
     def test_eth_getHeaderByNumber_error_no_param(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = []
@@ -419,7 +385,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getHeaderByNumber_error_wrong_type_param1(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = [True]
@@ -427,7 +392,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_eth_getHeaderByNumber_error_wrong_value_param1(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = ["num"]
@@ -435,7 +399,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_eth_getHeaderByNumber_error_wrong_value_param2(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = ["0xffffffff"]
@@ -445,7 +408,6 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_eth_getHeaderByNumber_success(self):
-
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
         params = [num]
@@ -454,14 +416,12 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         eth_common.checkEthereumBlockOrHeaderFormat(self, result)
 
     def test_eth_getUncleByBlockNumberAndIndex_error_no_param(self):
-
         method = f"{self.ns}_getUncleByBlockNumberAndIndex"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getUncleByBlockNumberAndIndex_success(self):
-
         method = f"{self.ns}_getUncleByBlockNumberAndIndex"
         DUMMY_BLOCK_NUMBER = "0x20"
         DUMMY_INDEX = "0x1"
@@ -471,14 +431,12 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_eth_getUncleByBlockHashAndIndex_error_no_param(self):
-
         method = f"{self.ns}_getUncleByBlockHashAndIndex"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getUncleByBlockHashAndIndex_success(self):
-
         method = f"{self.ns}_getUncleByBlockHashAndIndex"
         DUMMY_HASH = "0x3e39ec3b9f3b9d8786c0dc9f76e24fba63bc840cf57b12f24bdecf242c6a2c29"
         DUMMY_INDEX = "0x1"
@@ -488,14 +446,12 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_eth_getUncleCountByBlockNumber_error_no_param(self):
-
         method = f"{self.ns}_getUncleCountByBlockNumber"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getUncleCountByBlockNumber_success(self):
-
         method = f"{self.ns}_getUncleCountByBlockNumber"
         DUMMY_BLOCK_NUMBER = "0x20"
         params = [DUMMY_BLOCK_NUMBER]
@@ -504,14 +460,12 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertEqual(result, "0x0")
 
     def test_eth_getUncleCountByBlockHash_error_no_param(self):
-
         method = f"{self.ns}_getUncleCountByBlockHash"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_eth_getUncleCountByBlockHash_success(self):
-
         method = f"{self.ns}_getUncleCountByBlockHash"
         DUMMY_HASH = "0x3e39ec3b9f3b9d8786c0dc9f76e24fba63bc840cf57b12f24bdecf242c6a2c29"
         params = [DUMMY_HASH]

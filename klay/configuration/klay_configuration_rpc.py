@@ -16,88 +16,74 @@ class TestKlayNamespaceConfigurationRPC(unittest.TestCase):
     waiting_count = 2
 
     def test_klay_protocolVersion_success_wrong_value_param(self):
-
         method = f"{self.ns}_protocolVersion"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_protocolVersion_success(self):
-
         method = f"{self.ns}_protocolVersion"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_gasPrice_success_wrong_value_param(self):
-
         method = f"{self.ns}_gasPrice"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_gasPrice_success(self):
-
         method = f"{self.ns}_gasPrice"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_isParallelDBWrite_success_wrong_value_param(self):
-
         method = f"{self.ns}_isParallelDBWrite"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_isParallelDBWrite_success(self):
-
         method = f"{self.ns}_isParallelDBWrite"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_isSenderTxHashIndexingEnabled_success_wrong_value_param(self):
-
         method = f"{self.ns}_isSenderTxHashIndexingEnabled"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_isSenderTxHashIndexingEnabled_success(self):
-
         method = f"{self.ns}_isSenderTxHashIndexingEnabled"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_rewardbase_success_wrong_value_param(self):
-
         method = f"{self.ns}_rewardbase"
         _, error = Utils.call_rpc(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_rewardbase_success(self):
-
         method = f"{self.ns}_rewardbase"
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_chainId_success(self):
-
         method = f"{self.ns}_chainId"
         params = None
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_klay_chainId_success_wrong_value_param(self):
-
         method = f"{self.ns}_chainId"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_klay_clientVersion_success_wrong_value_param(self):
-
         method = f"{self.ns}_clientVersion"
         params = ["abcd"]
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_klay_clientVersion_success(self):
-
         method = f"{self.ns}_clientVersion"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)

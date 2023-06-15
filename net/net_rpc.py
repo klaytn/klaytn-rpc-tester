@@ -17,14 +17,12 @@ class TestNetNamespaceRPC(unittest.TestCase):
     waiting_count = 2
 
     def test_net_version_success(self):
-
         method = f"{self.ns}_version"
 
         _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_net_networkID_success_wrong_value_param(self):
-
         method = f"{self.ns}_networkID"
         params = ["abcd"]
 
@@ -32,14 +30,12 @@ class TestNetNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_net_networkID_success(self):
-
         method = f"{self.ns}_networkID"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_net_listening_success_wrong_value_param(self):
-
         method = f"{self.ns}_listening"
         params = ["abcd"]
 
@@ -47,14 +43,12 @@ class TestNetNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_net_listening_success(self):
-
         method = f"{self.ns}_listening"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_net_peerCount_success_wrong_value_param(self):
-
         method = f"{self.ns}_peerCount"
         params = ["abcd"]
 
@@ -62,14 +56,12 @@ class TestNetNamespaceRPC(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_net_peerCount_success(self):
-
         method = f"{self.ns}_peerCount"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
     def test_net_peerCountByType_success(self):
-
         method = f"{self.ns}_peerCountByType"
         params = []
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)

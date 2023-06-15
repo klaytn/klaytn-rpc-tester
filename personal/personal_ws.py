@@ -17,20 +17,17 @@ class TestPersonalNamespaceWS(unittest.TestCase):
     waiting_count = 2
 
     def test_personal_importRawKey_error_no_param1(self):
-
         method = f"{self.ns}_importRawKey"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_personal_importRawKey_error_no_param2(self):
-
         method = f"{self.ns}_importRawKey"
         key = hexlify(urandom(32)).decode()
         result, error = Utils.call_ws(self.endpoint, method, [key], self.log_path)
         Utils.check_error(self, "arg1NoParams", error)
 
     def test_personal_importRawKey_error_wrong_type_param1(self):
-
         method = f"{self.ns}_importRawKey"
         _, error = Utils.call_ws(
             self.endpoint,
@@ -41,20 +38,17 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0NumberToString", error)
 
     def test_personal_importRawKey_error_wrong_type_param2(self):
-
         method = f"{self.ns}_importRawKey"
         key = hexlify(urandom(32)).decode()
         _, error = Utils.call_ws(self.endpoint, method, [key, 1234], self.log_path)
         Utils.check_error(self, "arg1NumberToString", error)
 
     def test_personal_importRawKey_error_wrong_value_param1(self):
-
         method = f"{self.ns}_importRawKey"
         _, error = Utils.call_ws(self.endpoint, method, ["wrongKey", "wrongPasswordValue"], self.log_path)
         Utils.check_error(self, "InvalidHexString", error)
 
     def test_personal_importRawKey_success(self):
-
         method = f"{self.ns}_importRawKey"
         key = hexlify(urandom(32)).decode()
         passphrase = test_data_set["account"]["import"]["password"]
@@ -67,63 +61,53 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIn(imported_address, result)
 
     def test_personal_listAccounts_success_wrong_value_param(self):
-
         method = f"{self.ns}_listAccounts"
         _, error = Utils.call_ws(self.endpoint, method, ["abcd"], self.log_path)
         self.assertIsNone(error)
 
     def test_personal_listAccounts_success(self):
-
         method = f"{self.ns}_listAccounts"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
 
     def test_personal_lockAccount_error_no_param(self):
-
         method = f"{self.ns}_lockAccount"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_personal_lockAccount_error_wrong_type_param1(self):
-
         method = f"{self.ns}_lockAccount"
         _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
         Utils.check_error(self, "arg0NonstringToAddress", error)
 
     def test_personal_lockAccount_error_wrong_type_param2(self):
-
         method = f"{self.ns}_lockAccount"
         _, error = Utils.call_ws(self.endpoint, method, ["strangeStrings"], self.log_path)
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_personal_lockAccount_success(self):
-
         method = f"{self.ns}_lockAccount"
         address = test_data_set["account"]["sender"]["address"]
         _, error = Utils.call_ws(self.endpoint, method, [address], self.log_path)
         self.assertIsNone(error)
 
     def test_personal_unlockAccount_error_no_param1(self):
-
         method = f"{self.ns}_unlockAccount"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_personal_unlockAccount_error_no_param2(self):
-
         method = f"{self.ns}_unlockAccount"
         address = test_data_set["account"]["sender"]["address"]
         _, error = Utils.call_ws(self.endpoint, method, [address], self.log_path)
         Utils.check_error(self, "arg1NoParams", error)
 
     def test_personal_unlockAccount_error_wrong_type_param1(self):
-
         method = f"{self.ns}_unlockAccount"
         _, error = Utils.call_ws(self.endpoint, method, ["address", "passPhrase", "duration"], self.log_path)
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_personal_unlockAccount_error_wrong_type_param2(self):
-
         method = f"{self.ns}_unlockAccount"
         address = test_data_set["account"]["sender"]["address"]
         passphrase = test_data_set["account"]["sender"]["password"]
@@ -131,7 +115,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg2StringToUint64", error)
 
     def test_personal_unlockAccount_error_wrong_type_param3(self):
-
         method = f"{self.ns}_unlockAccount"
         passphrase = test_data_set["account"]["sender"]["password"]
         duration = 100000
@@ -139,7 +122,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0HexToAddress", error)
 
     def test_personal_unlockAccount_error_wrong_value_param(self):
-
         method = f"{self.ns}_unlockAccount"
         address = test_data_set["account"]["sender"]["address"]
         duration = 100000
@@ -152,7 +134,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "CouldntDecryptKey", error)
 
     def test_personal_unlockAccount_success_no_duration(self):
-
         method = f"{self.ns}_unlockAccount"
         address = test_data_set["account"]["sender"]["address"]
         passphrase = test_data_set["account"]["sender"]["password"]
@@ -160,7 +141,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_unlockAccount_success(self):
-
         method = f"{self.ns}_unlockAccount"
         address = test_data_set["account"]["sender"]["address"]
         passphrase = test_data_set["account"]["sender"]["password"]
@@ -169,19 +149,16 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_newAccount_error_no_param(self):
-
         method = f"{self.ns}_newAccount"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_personal_newAccount_error_wrong_type_param(self):
-
         method = f"{self.ns}_newAccount"
         _, error = Utils.call_ws(self.endpoint, method, [1234], self.log_path)
         Utils.check_error(self, "arg0NumberToString", error)
 
     def test_personal_newAccount_success(self):
-
         method = f"{self.ns}_newAccount"
         passphrase = test_data_set["account"]["sender"]["password"]
         _, error = Utils.call_ws(self.endpoint, method, [passphrase], self.log_path)
@@ -199,24 +176,20 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         return result, error
 
     def test_personal_sendTransaction_error_no_param1(self):
-
         _, error = self.send_transaction()
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_personal_sendTransaction_error_no_param2(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         _, error = self.send_transaction({"from": sender})
         Utils.check_error(self, "arg1NoParams", error)
 
     def test_personal_sendTransaction_error_no_param3(self):
-
         password = test_data_set["account"]["sender"]["password"]
         _, error = self.send_transaction(None, password)
         Utils.check_error(self, "arg0StringToSendtx", error)
 
     def test_personal_sendTransaction_error_no_param4(self):
-
         password = test_data_set["account"]["sender"]["password"]
         gas_price = test_data_set["unitGasPrice"]
         value = hex(Utils.to_peb(1.5))
@@ -225,7 +198,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "ContractCreationWithoutData", error)
 
     def test_personal_sendTransaction_error_no_param5(self):
-
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
         gas = hex(304000)
@@ -236,7 +208,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "UnknownAccount", error)
 
     def test_personal_sendTransaction_error_no_param6(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         gas = hex(304000)
         gas_price = test_data_set["unitGasPrice"]
@@ -246,7 +217,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg1NoParams", error)
 
     def test_personal_sendTransaction_success_no_param1(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -255,7 +225,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_sendTransaction_success_no_param2(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -265,7 +234,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_sendTransaction_success_no_param3(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -276,7 +244,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_sendTransaction_success_no_param4(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -286,7 +253,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_sendTransaction_success_no_param5(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -297,7 +263,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_sendTransaction_error_wrong_type_param1(self):
-
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
         gas = hex(304000)
@@ -311,7 +276,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToSendTxArgsFromAddress", error)
 
     def test_personal_sendTransaction_error_wrong_type_param2(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         gas = hex(304000)
@@ -331,7 +295,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToSendTxArgsToAddress", error)
 
     def test_personal_sendTransaction_error_wrong_type_param3(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -351,7 +314,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToSendTxArgsGasUint", error)
 
     def test_personal_sendTransaction_error_wrong_type_param4(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -365,7 +327,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToSendTxArgsGaspriceBig", error)
 
     def test_personal_sendTransaction_error_wrong_type_param5(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -385,7 +346,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0NonstringToSendTxArgsValueBig", error)
 
     def test_personal_sendTransaction_error_wrong_type_param6(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         to = test_data_set["account"]["receiver"]["address"]
         gas = hex(304000)
@@ -405,7 +365,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg1NumberToString", error)
 
     def test_personal_sendTransaction_error_wrong_value_param1(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -426,7 +385,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0HexToSendTxArgsFromAddress", error)
 
     def test_personal_sendTransaction_error_wrong_value_param2(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -447,7 +405,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "arg0HexToSendTxArgsToAddress", error)
 
     def test_personal_sendTransaction_error_wrong_value_param3(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -468,7 +425,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "GasTooLow", error)
 
     def test_personal_sendTransaction_error_wrong_value_param4(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -489,7 +445,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "InvalidGasPrice", error)
 
     def test_personal_sendTransaction_error_wrong_value_param5(self):
-
         to = test_data_set["account"]["receiver"]["address"]
         gas = hex(304000)
         gas_price = test_data_set["unitGasPrice"]
@@ -513,7 +468,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "InsufficientFunds", error)
 
     def test_personal_sendTransaction_success(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         to = test_data_set["account"]["receiver"]["address"]
@@ -546,40 +500,34 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         return result, error
 
     def test_personal_sign_error_no_param(self):
-
         _, error = self.sign()
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_personal_sign_error_wrong_type_param1(self):
-
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
         _, error = self.sign("message", sender, password)
         Utils.check_error(self, "arg0HexToBytes", error)
 
     def test_personal_sign_error_wrong_type_param2(self):
-
         message = Utils.convert_to_hex("Hi Utils!")
         password = test_data_set["account"]["sender"]["password"]
         _, error = self.sign(message, "sender", password)
         Utils.check_error(self, "arg1HexToAddress", error)
 
     def test_personal_sign_error_wrong_type_param3(self):
-
         message = Utils.convert_to_hex("Hi Utils!")
         sender = test_data_set["account"]["sender"]["address"]
         _, error = self.sign(message, sender, 1234)
         Utils.check_error(self, "arg2NumberToString", error)
 
     def test_personal_sign_error_wrong_value_param(self):
-
         message = Utils.convert_to_hex("Hi Utils!")
         sender = test_data_set["account"]["sender"]["address"]
         _, error = self.sign(message, sender, "abcd")
         Utils.check_error(self, "CouldntDecryptKey", error)
 
     def test_personal_sign_success(self):
-
         message = Utils.convert_to_hex("Hi Utils!")
         sender = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -587,27 +535,23 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         self.assertIsNone(error)
 
     def test_personal_ecRecover_error_no_param(self):
-
         method = f"{self.ns}_ecRecover"
         _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
 
     def test_personal_ecRecover_error_wrong_type_param1(self):
-
         method = f"{self.ns}_ecRecover"
         message = Utils.convert_to_hex("Hi Utils!")
         _, error = Utils.call_ws(self.endpoint, method, [message, 1234], self.log_path)
         Utils.check_error(self, "arg1NonstringToBytes", error)
 
     def test_personal_ecRecover_error_wrong_type_param2(self):
-
         method = f"{self.ns}_ecRecover"
         message = Utils.convert_to_hex("Hi Utils!")
         _, error = Utils.call_ws(self.endpoint, method, [message, "abcd"], self.log_path)
         Utils.check_error(self, "arg1HexToBytes", error)
 
     def test_personal_ecRecover_error_wrong_value_param(self):
-
         message = Utils.convert_to_hex("Hi Utils!")
         signer = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
@@ -620,7 +564,6 @@ class TestPersonalNamespaceWS(unittest.TestCase):
         Utils.check_error(self, "InvalidKlaytnSignature", error)
 
     def test_personal_ecRecover_success(self):
-
         message = Utils.convert_to_hex("Hi Utils!")
         signer = test_data_set["account"]["sender"]["address"]
         password = test_data_set["account"]["sender"]["password"]
