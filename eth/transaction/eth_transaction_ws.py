@@ -338,7 +338,7 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
             }
         ]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "InsufficientFunds", error)
+        Utils.check_error(self, "InsufficientFundsFrom", error)
 
     def test_eth_sendTransaction_success(self):
         method = f"{self.ns}_sendTransaction"
@@ -1238,7 +1238,22 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0StringToEthTransactionArgsDataBytes", error)
 
-    def test_eth_estimateGas_error_exceeds_allowance(self):
+    def test_eth_estimateGas_error_insufficient_balance(self):
+        method = f"{self.ns}_estimateGas"
+        zeroBalanceAddr = "0x15318f21f3dee6b2c64d2a633cb8c1194877c882"
+        txValue = hex(1)
+        params = [
+            {
+                "from": zeroBalanceAddr,
+                "to": zeroBalanceAddr,
+                "value": txValue,
+            },
+            "latest",
+        ]
+        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        Utils.check_error(self, "InsufficientBalance", error)
+
+    def test_eth_estimateGas_error_insufficient_funds(self):
         method = f"{self.ns}_estimateGas"
         zeroBalanceAddr = "0x15318f21f3dee6b2c64d2a633cb8c1194877c882"
         contract = test_data_set["contracts"]["unknown"]["address"][0]
@@ -1252,6 +1267,23 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
                 "to": contract,
                 "data": code,
                 "gas": "0x999",
+                "gasPrice": txGasPrice,
+            },
+            "latest",
+        ]
+        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        Utils.check_error(self, "InsufficientFunds", error)
+
+    def test_eth_estimateGas_error_exceeds_allowance(self):
+        method = f"{self.ns}_estimateGas"
+        address = test_data_set["account"]["1pebHolder"]["address"]
+        txGasPrice = test_data_set["unitGasPrice"]
+        txValue = hex(0)
+        params = [
+            {
+                "from": address,
+                "to": address,
+                "value": txValue,
                 "gasPrice": txGasPrice,
             },
             "latest",
@@ -1459,6 +1491,8 @@ class TestEthNamespaceTransactionWS(unittest.TestCase):
         suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_no_param"))
         suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_wrong_type_param1"))
         suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_wrong_type_param2"))
+        suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_insufficient_balance"))
+        suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_insufficient_funds"))
         suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_exceeds_allowance"))
         suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_evm_revert_message"))
         suite.addTest(TestEthNamespaceTransactionWS("test_eth_estimateGas_error_revert"))

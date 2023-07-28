@@ -193,6 +193,9 @@ def load_test_data():
                 "password": "",
                 "privateKey": ""
             },
+            "1pebHolder": {
+                "address": ""
+            },
             "feePayer": {
                 "address": "",
                 "password": "",
@@ -248,6 +251,8 @@ def load_test_data():
         "feePayerPrivateKey", config["faucetPrivateKey"]
     )
     test_data_set["account"]["receiver"]["address"] = "0x44711E89b0c23845b5B2ed9D3716BA42b8a3e075"
+    # 1pebHolder is for estimateGas test case
+    test_data_set["account"]["1pebHolder"]["address"] = "0x1111111111111111111111111111111111111111"
     gas_price, error = Utils.call_rpc("", "klay_gasPrice", [], log_path)
     assert error is None
     test_data_set["unitGasPrice"] = gas_price
@@ -276,7 +281,7 @@ def makeTxData():
             "type": "TxTypeLegacyTransaction",
             "tx": {
                 "from": txFrom,
-                "to": txTo,
+                "to": test_data_set["account"]["1pebHolder"]["address"],
                 "gas": txGas,
                 "gasPrice": txGasPrice,
                 "value": txValueOne,

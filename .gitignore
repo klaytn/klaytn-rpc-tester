@@ -15,4 +15,5 @@ config.json
 .idea/
 reports/
 testReport/
-
+__pycache__
+block.rlp

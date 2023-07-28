@@ -339,7 +339,7 @@ class TestKlayNamespaceTransactionRPC(unittest.TestCase):
             }
         ]
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "InsufficientFunds", error)
+        Utils.check_error(self, "InsufficientFundsFrom", error)
 
     def test_klay_sendTransaction_success(self):
         method = f"{self.ns}_sendTransaction"
