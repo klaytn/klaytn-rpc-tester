@@ -465,7 +465,7 @@ class TestPersonalNamespaceRPC(unittest.TestCase):
             },
             "",
         )
-        Utils.check_error(self, "InsufficientFunds", error)
+        Utils.check_error(self, "InsufficientFundsFrom", error)
 
     def test_personal_sendTransaction_success(self):
         sender = test_data_set["account"]["sender"]["address"]
