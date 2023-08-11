@@ -41,13 +41,11 @@ class TestKlayNamespaceMiscellaneousWS(unittest.TestCase):
         params = None
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "arg0NoParams", error)
-        print(error)
 
     def test_klay_forkStatus_error_wrong_value_param(self):
         method = f"{self.ns}_forkStatus"
         params = ["num"]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
-        print(error)
         Utils.check_error(self, "arg0HexWithoutPrefix", error)
 
     def test_klay_forkStatus_error_wrong_value_param2(self):
@@ -56,7 +54,6 @@ class TestKlayNamespaceMiscellaneousWS(unittest.TestCase):
         params = ["0xffffffff"]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         Utils.check_error(self, "BlockNotExist", error)
-        print(error)
 
     def test_klay_forkStatus_success(self):
         method = f"{self.ns}_forkStatus"
@@ -161,7 +158,7 @@ class TestKlayNamespaceMiscellaneousWS(unittest.TestCase):
         suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_sha3_error_no_param"))
         suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_sha3_error_wrong_type_param"))
         suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_sha3_success"))
-        suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_forkStatus_success_no_param"))
+        suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_forkStatus_error_no_param"))
         suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_forkStatus_error_wrong_value_param"))
         suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_forkStatus_error_wrong_value_param2"))
         suite.addTest(TestKlayNamespaceMiscellaneousWS("test_klay_forkStatus_success"))
