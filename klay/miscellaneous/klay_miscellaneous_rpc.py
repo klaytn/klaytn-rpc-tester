@@ -36,7 +36,7 @@ class TestKlayNamespaceMiscellaneousRPC(unittest.TestCase):
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
-    def test_klay_forkStatus_success_no_param(self):
+    def test_klay_forkStatus_error_no_param(self):
         method = f"{self.ns}_forkStatus"
         params = None
         _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
