@@ -1,10 +1,12 @@
 {
     "config": {
-        "chainId": 940625,
+        "chainId": 2019,
         "istanbulCompatibleBlock": 0,
         "londonCompatibleBlock": 0,
         "ethTxTypeCompatibleBlock": 0,
         "magmaCompatibleBlock": 10,
+        "koreCompatibleBlock": 20,
+        "shanhaiCompatibleBlock": 30,
         "istanbul": {
             "epoch": 30,
             "policy": 2,
@@ -61,6 +63,9 @@
             "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
         },
 		"f77e71cf745e14129a344bcfb7e28240a5351beb": {
+            "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
+		},
+        "a2a8854b1802d8cd5de631e690817c253d6a9153": {
             "balance": "0x446c3b15f9926687d2c40534fdb564000000000000"
 		}
     },

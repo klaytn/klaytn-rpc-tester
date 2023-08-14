@@ -14,6 +14,7 @@ errors_json = """
     "arg1HexToAddress": [-32602 ,"invalid argument 1: json: cannot unmarshal hex string without 0x prefix into Go value of type common.Address"],
     "arg0HexToBytes": [-32602 ,"invalid argument 0: json: cannot unmarshal hex string without 0x prefix into Go value of type hexutil.Bytes"],
     "arg1HexToBytes": [-32602 ,"invalid argument 1: json: cannot unmarshal hex string without 0x prefix into Go value of type hexutil.Bytes"],
+    "arg2HexToBytes": [-32602 ,"invalid argument 2: json: cannot unmarshal hex string without 0x prefix into Go value of type hexutil.Bytes"],
     "arg0StringToHexutilUint64": [-32602 ,"invalid argument 0: json: cannot unmarshal hex string without 0x prefix into Go value of type hexutil.Uint64"],
     "arg0HexToCallArgsGasUint64": [-32602 ,"invalid argument 0: json: cannot unmarshal hex string without 0x prefix into Go struct field CallArgs.gas of type hexutil.Uint64"],
     "arg0HexToCallArgsGaspriceBig": [-32602 ,"invalid argument 0: json: cannot unmarshal hex string without 0x prefix into Go struct field CallArgs.gasPrice of type *hexutil.Big"],
@@ -63,7 +64,9 @@ errors_json = """
     "arg0NonstringToEthTransactionArgsGaspriceBig": [-32602 ,"invalid argument 0: json: cannot unmarshal non-string into Go struct field EthTransactionArgs.gasPrice of type *hexutil.Big"],
     "arg0NonstringToEthTransactionArgsValueBig": [-32602 ,"invalid argument 0: json: cannot unmarshal non-string into Go struct field EthTransactionArgs.value of type *hexutil.Big"],
     "arg0NonstringToEthTransactionArgsDataBytes": [-32602, "invalid argument 0: json: cannot unmarshal non-string into Go struct field EthTransactionArgs.data of type hexutil.Bytes"],
+    "arg0NonstringToBytes": [-32602 ,"invalid argument 0: json: cannot unmarshal non-string into Go value of type hexutil.Bytes"],
     "arg1NonstringToBytes": [-32602 ,"invalid argument 1: json: cannot unmarshal non-string into Go value of type hexutil.Bytes"],
+    "arg2NonstringToBytes": [-32602 ,"invalid argument 2: json: cannot unmarshal non-string into Go value of type hexutil.Bytes"],
     "arg0NonstringToCallArgsFromAddress": [-32602 ,"invalid argument 0: json: cannot unmarshal non-string into Go struct field CallArgs.from of type common.Address"],
     "arg0NonstringToCallArgsToAddress": [-32602 ,"invalid argument 0: json: cannot unmarshal non-string into Go struct field CallArgs.to of type common.Address"],
     "arg0NonstringToCallArgsDataBytes": [-32602 ,"invalid argument 0: json: cannot unmarshal non-string into Go struct field CallArgs.data of type hexutil.Bytes"],
@@ -108,13 +111,16 @@ errors_json = """
     "GasRequiredExceedsAllowance": [-32000, "gas required exceeds allowance (0)"],
     "VMErrorOccurs": [-32000 ,"VM error occurs while running smart contract"],
     "InvalidKlaytnSignature": [-32000 ,"invalid Klaytn signature (V is not 27 or 28)"],
+    "InvalidTransaction": [-32000, "invalid transaction v, r, s values"],
+    "InvalidSignatureSize": [-32000, "signature must be 65 bytes long"],
     "UnknownBlock": [-32000 ,"Unknown block"],
     "unknownblock": [-32000 ,"unknown block"],
     "TransactionNotFound": [-32000 ,"transaction ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff not found"],
     "BlockNumberNotAssigned": [-32000 ,"block number is not assigned"],
     "ExistingFile": [-32000 ,"location would overwrite an existing file"],
     "GasNotSpecified": [-32000, "gas not specified"],
-    "UndefinedTxType": [-32000, "undefined tx type"]
+    "UndefinedTxType": [-32000, "undefined tx type"],
+    "RlpExceed": [-32000, "rlp: value size exceeds available input length"]
 
 }
 """

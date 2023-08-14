@@ -666,6 +666,15 @@ def prepare():
         test_data_set["contracts"][contract]["address"][0] = receipt["contractAddress"]
 
 
+def make_multisig_account():
+    method = "klay_sendRawTransaction"
+    params = [
+        "0x20f8db808604bab82720008366926694a2a8854b1802d8cd5de631e690817c253d6a9153b86f05f86ca302a103f26489914098c5da51f0f646e3000da4d6197217df082b4f7ce1530f0a0cbf2aa302a10263021199702b9fefca617bdcb2a9ed4a810dfa8d270d4e804a1e778450e63ec3a302a103dc9dccbd788c00fa98f7f4082f2f714e799bc0c29d63f04d48b54fe6250453cdf847f845820fe9a05a718af76dfc82143975058065acb99c4d66bac99c3d226e7dde31d6b954de14a03b17300eb773d4a2a20b71b92eae33f1411dc74bb80e0c2316572345908539e7"
+    ]
+    result, error = Utils.call_rpc("", method, params, log_path)
+    assert error is None
+
+
 def inject_test_data_to_testcases():
     """
     Inject prepared test_data_set to each test files.
@@ -783,6 +792,7 @@ def initialize():
     prepare()
     makeTxData()
     inject_test_data_to_testcases()
+    make_multisig_account()
     load_test_suites()
 
 
