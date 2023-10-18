@@ -224,7 +224,7 @@ class TestDebugNamespaceWS(unittest.TestCase):
 
     def test_debug_blockProfile_success(self):
         method = f"{self.ns}_blockProfile"
-        params = ["block_created_by_ws.profile", 10]
+        params = ["block_created_by_ws.profile", 1]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
@@ -267,7 +267,7 @@ class TestDebugNamespaceWS(unittest.TestCase):
 
     def test_debug_cpuProfile_success(self):
         method = f"{self.ns}_cpuProfile"
-        params = ["cpu_created_by_ws.profile", 10]
+        params = ["cpu_created_by_ws.profile", 1]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
@@ -593,7 +593,7 @@ class TestDebugNamespaceWS(unittest.TestCase):
 
     def test_debug_setHead_success(self):
         method = f"{self.ns}_setHead"
-        _, error = Utils.call_ws(self.endpoint, method, ["0x325aa0"], self.log_path)
+        _, error = Utils.call_ws(self.endpoint, method, ["0x1"], self.log_path)
         self.assertIsNone(error)
 
     def test_debug_setBlockProfileRate_error_no_param(self):
