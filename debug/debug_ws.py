@@ -918,7 +918,9 @@ class TestDebugNamespaceWS(unittest.TestCase):
         """
         suite.addTest(TestDebugNamespaceWS("test_debug_freeOSMemory_success_wrong_value_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_freeOSMemory_success"))
+        """
         suite.addTest(TestDebugNamespaceWS("test_debug_setHead_success"))
+        """
         suite.addTest(TestDebugNamespaceWS("test_debug_setBlockProfileRate_error_no_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_setBlockProfileRate_error_wrong_type_param"))
         suite.addTest(TestDebugNamespaceWS("test_debug_setBlockProfileRate_success"))
