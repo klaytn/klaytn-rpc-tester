@@ -329,6 +329,30 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         self.assertIsNone(error)
         eth_common.checkEthereumBlockOrHeaderFormat(self, result)
 
+    def test_eth_getBlockReceipts_error_no_param(self):
+        method = f"{self.ns}_getBlockReceipts"
+        params = []
+        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        Utils.check_error(self, "arg0NoParams", error)
+
+    def test_eth_getBlockReceipts_error_wrong_type_param(self):
+        method = f"{self.ns}_getBlockReceipts"
+        params = ["abcd"]
+        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        Utils.check_error(self, "arg0HexWithoutPrefix", error)
+
+    def test_eth_getBlockReceipts_fail_wrong_value_param(self):
+        method = f"{self.ns}_getBlockReceipts"
+        params = ["0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]
+        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        Utils.check_error(self, "BlockDoesNotExist", error)
+
+    def test_eth_getBlockReceipts_success(self):
+        method = f"{self.ns}_getBlockReceipts"
+        params = [10]
+        _, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+
     def test_eth_getHeaderByHash_error_no_param(self):
         method = f"{self.ns}_getHeaderByNumber"
         num = "latest"
@@ -517,7 +541,10 @@ class TestEthNamespaceBlockRPC(unittest.TestCase):
         suite.addTest(TestEthNamespaceBlockRPC("test_eth_getBlockByNumber_error_wrong_value_param2"))
 
         suite.addTest(TestEthNamespaceBlockRPC("test_eth_getBlockByNumber_success"))
-
+        suite.addTest(TestEthNamespaceBlockRPC("test_eth_getBlockReceipts_error_no_param"))
+        suite.addTest(TestEthNamespaceBlockRPC("test_eth_getBlockReceipts_error_wrong_type_param"))
+        suite.addTest(TestEthNamespaceBlockRPC("test_eth_getBlockReceipts_fail_wrong_value_param"))
+        suite.addTest(TestEthNamespaceBlockRPC("test_eth_getBlockReceipts_success"))
         suite.addTest(TestEthNamespaceBlockRPC("test_eth_getHeaderByHash_error_no_param"))
         suite.addTest(TestEthNamespaceBlockRPC("test_eth_getHeaderByHash_error_wrong_type_param1"))
         suite.addTest(TestEthNamespaceBlockRPC("test_eth_getHeaderByHash_error_wrong_value_param"))
