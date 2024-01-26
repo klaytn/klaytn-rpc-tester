@@ -17,8 +17,9 @@ class TestEthNamespaceGasRPC(unittest.TestCase):
 
     def test_eth_maxPriorityFeePerGas_success(self):
         method = f"{self.ns}_maxPriorityFeePerGas"
-        _, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
+        result, error = Utils.call_rpc(self.endpoint, method, [], self.log_path)
         self.assertIsNone(error)
+        self.assertEqual(result, "0x0")
 
     def test_eth_feeHistory_success(self):
         method = f"{self.ns}_feeHistory"

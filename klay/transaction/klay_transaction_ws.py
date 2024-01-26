@@ -795,6 +795,20 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         result, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
+    def test_klay_createAccessList_success(self):
+        method = f"{self.ns}_createAccessList"
+        txFrom = test_data_set["account"]["sender"]["address"]
+        txTo = test_data_set["contracts"]["unknown"]["address"][0]
+        code = test_data_set["contracts"]["unknown"]["input"]
+        params = {
+            "from": txFrom,
+            "to": txTo,
+            "data": code,
+        }
+
+        result, error = Utils.call_ws(self.endpoint, method, [params], self.log_path)
+        self.assertIsNone(error)
+
     def test_klay_sendRawTransaction_DynamicFee_error_wrong_prefix(self):
         method = f"{self.ns}_getTransactionCount"
         tag = "latest"
@@ -1328,6 +1342,17 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
 
+    def test_klay_call_success_input_instead_data(self):
+        method = f"{self.ns}_call"
+        address = test_data_set["account"]["sender"]["address"]
+        contract = test_data_set["contracts"]["unknown"]["address"][0]
+        code = test_data_set["contracts"]["unknown"]["input"]
+        txGas = hex(30400)
+        txGasPrice = test_data_set["unitGasPrice"]
+        params = [{"to": contract, "input": code}, "latest"]
+        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+
     def test_klay_estimateGas_error_no_param(self):
         method = f"{self.ns}_estimateGas"
         address = test_data_set["account"]["sender"]["address"]
@@ -1409,6 +1434,18 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         txGas = hex(30400)
         txGasPrice = test_data_set["unitGasPrice"]
         txValue = hex(0)
+        params = [{"from": address, "to": contract, "value": txValue, "input": code}]
+        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+
+    def test_klay_estimateGas_success_data_instead_input(self):
+        method = f"{self.ns}_estimateGas"
+        address = test_data_set["account"]["sender"]["address"]
+        contract = test_data_set["contracts"]["unknown"]["address"][0]
+        code = test_data_set["contracts"]["unknown"]["input"]
+        txGas = hex(30400)
+        txGasPrice = test_data_set["unitGasPrice"]
+        txValue = hex(0)
         params = [{"from": address, "to": contract, "value": txValue, "data": code}]
         _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
         self.assertIsNone(error)
@@ -1429,6 +1466,28 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
                 "gasPrice": txGasPrice,
                 "value": txValue,
                 "data": code,
+            },
+            "latest",
+        ]
+        _, error = Utils.call_ws(self.endpoint, method, params, self.log_path)
+        self.assertIsNone(error)
+
+    def test_klay_estimateComputationCost_success_input_instead_data(self):
+        method = f"{self.ns}_estimateComputationCost"
+        address = test_data_set["account"]["sender"]["address"]
+        contract = test_data_set["contracts"]["unknown"]["address"][0]
+        code = test_data_set["contracts"]["unknown"]["input"]
+        txGas = hex(30400)
+        txGasPrice = test_data_set["unitGasPrice"]
+        txValue = hex(0)
+        params = [
+            {
+                "from": address,
+                "to": contract,
+                "gas": txGas,
+                "gasPrice": txGasPrice,
+                "value": txValue,
+                "input": code,
             },
             "latest",
         ]
@@ -1597,6 +1656,7 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_sendRawTransaction_success"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_sendRawTransaction_AccessList_error_wrong_prefix"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_sendRawTransaction_AccessList_success"))
+        suite.addTest(TestKlayNamespaceTransactionWS("test_klay_createAccessList_success"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_sendRawTransaction_DynamicFee_error_wrong_prefix"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_sendRawTransaction_DynamicFee_success"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_getTransactionByBlockHashAndIndex_error_no_param"))
@@ -1632,13 +1692,15 @@ class TestKlayNamespaceTransactionWS(unittest.TestCase):
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_success2"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_success3"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_success4"))
+        suite.addTest(TestKlayNamespaceTransactionWS("test_klay_call_success_input_instead_data"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_no_param"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_wrong_type_param1"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_wrong_type_param2"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_error_evm_revert_message"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_success"))
+        suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateGas_success_data_instead_input"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateComputationCost_success"))
-
+        suite.addTest(TestKlayNamespaceTransactionWS("test_klay_estimateComputationCost_success_input_instead_data"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_getTransactionByHash_error_no_param"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_getTransactionByHash_error_wrong_type_param"))
         suite.addTest(TestKlayNamespaceTransactionWS("test_klay_getTransactionByHash_success_wrong_value_param"))

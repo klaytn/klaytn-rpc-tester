@@ -370,6 +370,13 @@ class TestAdminNamespaceWS(unittest.TestCase):
         _, error = Utils.call_ws(self.endpoint, method, ["/tmp/noexists.txt"], self.log_path)
         Utils.check_error(self, "NoSuchFile", error)
 
+    def test_admin_nodeConfig_success(self):
+        method = f"{self.ns}_nodeConfig"
+        _, error = Utils.call_ws(self.endpoint, method, [], self.log_path)
+        self.assertIsNone(error)
+
+        Utils.waiting_count("Waiting for", self.waiting_count, "seconds until stacking some klay logs.")
+
     @staticmethod
     def suite():
         suite = unittest.TestSuite()
@@ -418,5 +425,6 @@ class TestAdminNamespaceWS(unittest.TestCase):
         suite.addTest(TestAdminNamespaceWS("test_admin_importChain_error_no_param"))
         suite.addTest(TestAdminNamespaceWS("test_admin_importChain_error_wrong_type_param"))
         suite.addTest(TestAdminNamespaceWS("test_admin_importChain_error_wrong_value_param"))
+        suite.addTest(TestAdminNamespaceWS("test_admin_nodeConfig_success"))
 
         return suite
