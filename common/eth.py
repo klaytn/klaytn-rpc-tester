@@ -30,11 +30,21 @@ def get_block_number(endpoint):
     block_number, _ = Utils.call_rpc(endpoint, method, ["latest", True], log_path)
     return block_number
 
+def get_chain_config(endpoint):
+    method = "eth_getChainConfig"
+    chain_config, _ = Utils.call_rpc(endpoint, method, [], log_path)
+    return chain_config
 
 def checkBaseFeePerGasFieldAndValue(self, result, value=""):
     self.assertIsNotNone(result)
     self.assertIsNotNone(result["baseFeePerGas"])
+
     if value != "":
+        isMagma = get_chain_config(self.endpoint)['magmaCompatibleBlock'] <= int(get_block_number(self.endpoint), 16)
+        if isMagma:
+            value = "0x5d21dba00"
+        else:
+            value = "0x0"
         self.assertEqual(result["baseFeePerGas"], value)
 
 
