@@ -561,7 +561,7 @@ class TestPersonalNamespaceRPC(unittest.TestCase):
 
         method = f"{self.ns}_ecRecover"
         _, error = Utils.call_rpc(self.endpoint, method, [message, invalid_signature], self.log_path)
-        Utils.check_error(self, "InvalidKlaytnSignature", error)
+        Utils.check_error(self, "InvalidSignatureV", error)
 
     def test_personal_ecRecover_success(self):
         message = Utils.convert_to_hex("Hi Utils!")
