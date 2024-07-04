@@ -110,7 +110,7 @@ errors_json = """
     "InsufficientBalanceFeePayer": [-32000, "insufficient balance of the fee payer to pay for gas"],
     "GasRequiredExceedsAllowance": [-32000, "gas required exceeds allowance (0)"],
     "VMErrorOccurs": [-32000 ,"VM error occurs while running smart contract"],
-    "InvalidKlaytnSignature": [-32000 ,"invalid Klaytn signature (V is not 27 or 28)"],
+    "InvalidSignatureV": [-32000 ,"invalid signature (V is not 27 or 28)"],
     "InvalidTransaction": [-32000, "invalid transaction v, r, s values"],
     "InvalidSignatureSize": [-32000, "signature must be 65 bytes long"],
     "UnknownBlock": [-32000 ,"Unknown block"],

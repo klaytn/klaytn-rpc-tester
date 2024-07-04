@@ -140,7 +140,7 @@ class TestKlayNamespaceMiscellaneousRPC(unittest.TestCase):
         sig = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
         params = [address, message, sig, "latest"]
         result, error = Utils.call_rpc(self.endpoint, method, params, self.log_path)
-        Utils.check_error(self, "InvalidKlaytnSignature", error)
+        Utils.check_error(self, "InvalidSignatureV", error)
 
     def test_klay_recoverFromMessage_success(self):
         method = f"{self.ns}_recoverFromMessage"
